@@ -1,0 +1,63 @@
+[
+    {
+      "type": "Soups",
+      "name": "Chicken Noodle Soup",
+      "description": "Transfer chicken to a plate. Remove soup from heat. Add noodles; let stand, covered, until noodles are tender, 20-22 minutes.",
+      "ingredients": ["bone-in chicken thigh 2-1/2 pounds","chicken broth chicken broth","garlic clove 1","medium carrots 4","egg noodles about 8 ounces","salt and pepper optional"],
+      "tags": ["soups", "chicken"],
+      "cookTime": "30",
+      "calories": "low",
+      "directions": "Pat chicken dry with paper towels; sprinkle with salt and pepper. In a 6-qt. stockpot, heat oil over medium-high heat. Add chicken in batches, skin side down; cook until dark golden brown, 3-4 minutes. Remove chicken from pan; remove and discard skin. Discard all but 2 tablespoons drippings.",
+      "rates": "3"
+    },
+    {
+      "type": "Soups",
+      "name": "Beef Soup",
+      "description": "Transfer chicken to a plate. Remove soup from heat. Add noodles; let stand, covered, until noodles are tender, 20-22 minutes.",
+      "ingredients": ["ground beef 1/2 pound",
+      "water 2 caps",
+      "frozen mixed vegetables 10 ounces",
+      "tomato sauce 8 ounces",
+      "onion soup mix 1 envelope",
+      "sugar 1/2 teaspoon"],
+      "tags": ["soups", "beef"],
+      "cookTime": "30",
+      "calories": "low",
+      "directions": "In a saucepan over medium heat, cook beef until no longer pink, 3-5 minutes, breaking into crumbles; drain. Add the remaining ingredients; bring to a boil. Reduce heat; cover and simmer until vegetables are tender, 10-15 minutes.",
+      "rates":"4"
+    },
+
+    {
+      "type": "Soups",
+      "name": "Chineese Soup",
+      "description": "Transfer chicken to a plate. Remove soup from heat. Add noodles; let stand, covered, until noodles are tender, 20-22 minutes.",
+      "ingredients": ["ground beef 1/2 pound",
+      "water 2 caps",
+      "frozen mixed vegetables 10 ounces",
+      "tomato sauce 8 ounces",
+      "onion soup mix 1 envelope",
+      "sugar 1/2 teaspoon"],
+      "tags": ["soups", "beef", "low calorie", "healthy", "quick"],
+      "cookTime": "30",
+      "calories": "low",
+      "directions": "In a saucepan over medium heat, cook beef until no longer pink, 3-5 minutes, breaking into crumbles; drain. Add the remaining ingredients; bring to a boil. Reduce heat; cover and simmer until vegetables are tender, 10-15 minutes.",
+      "rates":"4"
+    },
+    {
+      "type": "Vegetables",
+      "name": "Roasted Vegetables",
+      "description": "Transfer chicken to a plate. Remove soup from heat. Add noodles; let stand, covered, until noodles are tender, 20-22 minutes.",
+      "ingredients": ["head cauliflower 1 medium",
+      "crown broccoli 1",
+      "sweet potatoes 2 medium",
+      "olive oil 4 tablespoons",
+      "garlic powder 2 teaspoons",
+      "kosher salt 1 teaspoon"],
+      "tags": ["vegetables", "roasted"],
+      "cookTime": "20",
+      "calories": "low",
+      "directions": "Chop the vegetables: Chop the cauliflower and broccoli +into florets. Chop the onion into 1/2-inch slices. Cut the sweet potato in half lengthwise, in half again lengthwise, and then cut each quarter into thin pie-shaped slices (see the photo). Chop the peppers into 1/2-inch strips, then cut the strips in half. Line two baking sheets with parchment paper (we prefer this to silicone baking mats because it results in crispier veggies). Spread the vegetables evenly onto each sheet. Drizzle half the olive oil onto each tray, then with half the seasonings onto each tray. Mix with your hands until evenly coated.",
+      "rates":"4"
+    }
+   
+  ]
