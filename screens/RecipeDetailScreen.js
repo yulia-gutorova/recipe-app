@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { LinearGradient } from "expo-linear-gradient";
+import axios from "axios";
 import {
     View,
     Text,
@@ -12,6 +13,9 @@ import {
     ScrollView
 } from "react-native";
 
+import Ingredients from "../components/Ingredients";
+import Tags from "../components/Tags";
+
 import { Entypo } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 
@@ -19,64 +23,89 @@ import { AntDesign } from '@expo/vector-icons';
 const Separator = () => <View style={styles.separator} />;
 
 const RecipeDetailScreen = ({ navigation, route }) => {
-
     const [ingredientsModalVisibility, setIngredientsModalVisibility] = useState(false);
     const [directionsModalVisibility, setDirectionsModalVisibility] = useState(false);
 
     console.log("Route params");
     console.log(route.params);
+    let recipe = route.params.recipe.item;
     let type = route.params.recipe.item.type;
-
+    let id = route.params.recipe.item._id;
     //const completedBookings = response.data.filter((booking: Booking) => booking.status === false);
 
-    const Ingredients = ({ ing }) => {
+    const Directions = ({ dir }) => {
         return (
-            ing.map(ingredient =>
-            (
+            <View style={styles.oneIngredient}>
+                <Text style={styles.directionText}>{dir}</Text>
+            </View>
+        )
+    }
+
+    const Rates = ({ r }) => {
+
+        switch (r) {
+
+
+            case 1: return (
                 <View style={styles.oneIngredient}>
-                    <Text style={styles.oneIngredientText}>{ingredient}</Text>
+                    <Text><AntDesign name="star" size={24} color="#daa520" /></Text>
                 </View>
-            ))
-        )
-    }
-
-    const Tags = ({ t }) => {
-        return (
-            t.map(tag=>
-            (
-                <>
-                    <Text style={styles.oneTag}>{tag}</Text>
-                </>
-            ))
-        )
-    }
-
-    const Directions= ({ dir }) => {
-        return (
+            )
+            case 2: return (
                 <View style={styles.oneIngredient}>
-                    <Text style={styles.directionText}>{dir}</Text>
+                    <Text><AntDesign name="star" size={24} color="#daa520" />
+                        <AntDesign name="star" size={24} color="#daa520" />
+                    </Text>
                 </View>
-        )
-    }
-
-    const Rates= ({ r }) => {
-        switch (r){
-            case "3": return (
-                        <View style={styles.oneIngredient}>
-                            <Text><AntDesign name="star" size={24} color="#daa520" /><AntDesign name="star" size={24} color="#daa520" /><AntDesign name="star" size={24} color="#daa520" /></Text>
-                        </View>
-                        
-        )
+            )
+            case 3: return (
+                <View style={styles.oneIngredient}>
+                    <Text><AntDesign name="star" size={24} color="#daa520" />
+                        <AntDesign name="star" size={24} color="#daa520" />
+                        <AntDesign name="star" size={24} color="#daa520" />
+                    </Text>
+                </View>
+            )
+            case 4: return (
+                <View style={styles.oneIngredient}>
+                    <Text><AntDesign name="star" size={24} color="#daa520" />
+                        <AntDesign name="star" size={24} color="#daa520" />
+                        <AntDesign name="star" size={24} color="#daa520" />
+                        <AntDesign name="star" size={24} color="#daa520" />
+                    </Text>
+                </View>
+            )
+            case 5: return (
+                <View style={styles.oneIngredient}>
+                    <Text><AntDesign name="star" size={24} color="#daa520" />
+                        <AntDesign name="star" size={24} color="#daa520" />
+                        <AntDesign name="star" size={24} color="#daa520" />                        <AntDesign name="star" size={24} color="#daa520" />
+                        <AntDesign name="star" size={24} color="#daa520" />
+                        <AntDesign name="star" size={24} color="#daa520" />
+                    </Text>
+                </View>
+            )
         }
-            
+    }
 
+    const handleDeleteRecipe = (id) => {
+        console.log(id);
 
+        const deleteRecipe = async () => {
+            let url = 'https://recipe-app-server-production.up.railway.app/recipes/' + id;
+            const resp = await axios.delete(url)
+                .then()
+                .catch((error) => console.log('Error: ', error));
+        };
+
+        deleteRecipe(id);
+        navigation.navigate("Recipes", { type: type });
     }
 
 
+    //=====================================================
     return (
         <ImageBackground style={styles.container} source={require("../assets/recipes-image.png")}>
-       {/* <View style={styles.container}> */}
 
             <View style={styles.titleContainer}>
                 <Text style={styles.titleText}>{route.params.recipe.item.name}</Text>
@@ -85,89 +114,87 @@ const RecipeDetailScreen = ({ navigation, route }) => {
             <View style={styles.detailContainer}>
 
                 <View style={styles.descriptionDetailContainer}>
-                    {/* <Text style={styles.detailText}>Id: {route.params.recipe.item._id}</Text> */}
 
                     <Text style={styles.detailText}>{route.params.recipe.item.description}</Text>
+                    <Text style={styles.detailText}>Cook time:  {route.params.recipe.item.cookTime} min</Text>
+                    <Text style={styles.detailText}>Calories:  {route.params.recipe.item.calories}</Text>
+
+                    <View style={{ flexDirection: "row" }}>
+                        <Tags t={route.params.recipe.item.tags}></Tags>
+                    </View>
+
+                    <View style={{ flexDirection: "row" }}>
+                        <Rates r={route.params.recipe.item.rates}></Rates>
+                    </View>
 
                     <Pressable
                         style={styles.btnGetProperties}
                         onPress={() => { setIngredientsModalVisibility(!ingredientsModalVisibility) }}>
-                        <Text style={[styles.btnGetText, {color: "darkgray"}]}><AntDesign name="pluscircle" size={24} color="#daa520" /> Ingredients</Text>
+                        <Text style={[styles.btnGetText, { color: "darkgray" }]}><AntDesign name="pluscircle" size={24} color="#daa520" /> Ingredients</Text
+                        >
 
-                                <Modal style={styles.modalContainer}
-                                    animationType={"fade"}
-                                    transparent={true}
-                                    visible={ingredientsModalVisibility}>
+                        <Modal style={styles.modalContainer}
+                            animationType={"fade"}
+                            transparent={true}
+                            visible={ingredientsModalVisibility}>
 
-                                    {/*All views of Modal*/}
-                                    <View style={styles.modal}>
-                                        <Text style={styles.titleText}>Ingredients:</Text>
+                            {/*All views of Modal*/}
+                            <View style={styles.modal}>
+                                <Text style={styles.titleText}>Ingredients:</Text>
 
-                                        <ScrollView style={styles.ingredientsContainer}>
-                                            <Ingredients ing={route.params.recipe.item.ingredients}></Ingredients>
-                                        </ScrollView>
+                                <ScrollView style={styles.ingredientsContainer}>
+                                    <Ingredients ing={route.params.recipe.item.ingredients}></Ingredients>
+                                </ScrollView>
 
-                                        <Button title="Close"
-                                            color="gray"
-                                            onPress={() => { setIngredientsModalVisibility(!ingredientsModalVisibility) }} />
-                                    </View>
-                                </Modal>
-           
+                            <Pressable
+                            style={styles.btnModal}
+                            onPress={() => { setIngredientsModalVisibility(!ingredientsModalVisibility) }}>
+                            <Text style={[styles.btnModalText]}>Close</Text>
+                            </Pressable>
+
+                            </View>
+                        </Modal>
+
                     </Pressable>
 
                     <Pressable
                         style={styles.btnGetProperties}
                         onPress={() => { setDirectionsModalVisibility(!directionsModalVisibility) }}>
-                        <Text style={[styles.btnGetText, {color:"darkgray"}]}><AntDesign name="pluscircle" size={24} color="#daa520" /> Directions</Text>
+                        <Text style={[styles.btnGetText, { color: "darkgray" }]}><AntDesign name="pluscircle" size={24} color="#daa520" /> Directions</Text>
 
-                                <Modal style={styles.modalContainer}
-                                    animationType={"fade"}
-                                    transparent={true}
-                                    visible={directionsModalVisibility}>
+                        <Modal style={styles.modalContainer}
+                            animationType={"fade"}
+                            transparent={true}
+                            visible={directionsModalVisibility}>
 
-                                    {/*All views of Modal*/}
-                                    <View style={styles.modal}>
-                                        <Text style={styles.titleText}>Directions:</Text>
+                            <View style={styles.modal}>
+                                <Text style={styles.titleText}>Directions:</Text>
 
-                                        <ScrollView style={styles.directionsContainer} showsVerticalScrollIndicator={true}>
-                                            <Directions dir={route.params.recipe.item.directions}></Directions>
-                                        </ScrollView>
+                                <ScrollView style={styles.directionsContainer} showsVerticalScrollIndicator={true}>
+                                    <Directions dir={route.params.recipe.item.directions}></Directions>
+                                </ScrollView>
 
-                                        <Button title="Close"
-                                            color="gray"
-                                            onPress={() => { setDirectionsModalVisibility(!directionsModalVisibility) }} />
-                                    </View>
-                                </Modal>
+                                <Pressable
+                                    style={styles.btnModal}
+                                    onPress={() => { setDirectionsModalVisibility(!directionsModalVisibility) }}>
+                                    <Text style={[styles.btnModalText]}>Close</Text>
+                                </Pressable>
+                            </View>
+                        </Modal>
 
-           
+
                     </Pressable>
 
 
-                    <Text style={styles.detailText}>Cook time:  {route.params.recipe.item.cookTime} min</Text>
-                    <Text style={styles.detailText}>Calories:  {route.params.recipe.item.calories}</Text>
-
-                    <View style={{flexDirection: "row"}}>
-                      <Tags t={route.params.recipe.item.tags}></Tags>
-                    </View>
-
-                    <View style={{flexDirection: "row"}}>
-                      <Rates r="3"></Rates>
-                    </View>
-
-                    {/* <Ingredients ing={route.params.recipe.item.ingredients}></Ingredients> */}
-                    {/*                    
-                    <Text style={styles.detailText}>Rates:  {route.params.recipe.item.rates}</Text>
-                            () => navigation.navigate("RecipeDetail", {title: item.name, recipe:{item}})
- */}
                     <View style={styles.buttonsDetailContainer}>
                         <Pressable
                             style={styles.btnDetailContainer}
-                            onPress={() => navigation.push("Home")}>
-                            <Text style={[styles.btnText, { color: "#daa520" }]}>Update </Text>
+                            onPress={() => navigation.navigate("Update", { recipe: { recipe } })}>
+                            <Text style={[styles.btnText, { color: "#daa520" }]}>Update</Text>
                         </Pressable>
                         <Pressable
                             style={styles.btnDetailContainer}
-                            onPress={() => navigation.push("Home")}>
+                            onPress={() => handleDeleteRecipe(route.params.recipe.item._id)}>
                             <Text style={[styles.btnText, { color: "#daa520" }]}>Delete</Text>
                         </Pressable>
 
@@ -181,7 +208,7 @@ const RecipeDetailScreen = ({ navigation, route }) => {
             <View style={styles.btnContainer}>
                 <Pressable
                     style={styles.btnBack}
-                    onPress={() => navigation.navigate("Recipes", { title: type })}>
+                    onPress={() => navigation.navigate("Recipes", { type: type })}>
                     <Text style={styles.btnText}><Entypo name="arrow-bold-left" size={24} color="#daa520" /> Recipes</Text>
                 </Pressable>
             </View>
@@ -210,7 +237,7 @@ const styles = StyleSheet.create({
         //justifyContent: 'center',
         //backgroundColor: "rgba(71, 53, 29, 0.83)",
         //backgroundColor: "rgba(74, 38, 0, 0.83)",
-        backgroundColor: "rgba(132, 160, 140, 0.53)",
+        backgroundColor: "rgba(0, 0, 0, 0.5)",
         alignItems: 'flex-end',
         justifyContent: 'center',
         //backgroundColor: "gray",
@@ -220,9 +247,9 @@ const styles = StyleSheet.create({
     titleContainer: {
         flex: 1,
         width: "100%",
-
         paddingTop: 0,
-        backgroundColor: "rgba(132, 160, 140, 0.53)",
+        //backgroundColor: "rgba(132, 160, 140, 0.53)",
+        backgroundColor: "rgba(0, 0, 0, 0.5)",
         //borderBottomRightRadius: 500,
         //borderBottomLeftRadius: 200,
         //opacity: 0.8
@@ -241,7 +268,8 @@ const styles = StyleSheet.create({
 
     descriptionDetailContainer: {
         flex: 1,
-        backgroundColor: "rgba(176, 165, 154, 0.83)",
+        //backgroundColor: "rgba(176, 165, 154, 0.83)",
+        //backgroundColor: "rgba(0, 0, 0, 0.5)",
         //marginVertical: 20,
         borderRadius: 20,
         alignItems: 'center',
@@ -265,33 +293,20 @@ const styles = StyleSheet.create({
 
 
     modalContainer: {
-        flex: 0.5,
+        flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
     },
 
     //-------------------------------------------------------------
-    oneIngredient: {
-        marginVertical: 5,
-    },
-
-    oneIngredientText: {
-        fontSize: 16
-    },
 
     directionText: {
         fontSize: 18,
-        marginHorizontal: 10, 
+        marginHorizontal: 10,
         paddingTop: 10
     },
 
-    oneTag: {
-        backgroundColor: "gray",
-        paddingVertical: 5,
-        paddingHorizontal: 10,
-        borderRadius: 15,
-        margin: 5
-    },
+
     titleText: {
         fontSize: 24,
         color: "#daa520",
@@ -307,13 +322,13 @@ const styles = StyleSheet.create({
     },
 
     detailText: {
-        fontSize: 16,
-        color: "black",
+        fontSize: 18,
+        color: "white",
         fontWeight: "bold",
         fontStyle: "italic",
         //marginLeft: 20,
         ///textAlign: "left",
-        margin: 10,
+        margin: 8,
         //textShadowOffset: { width: 1, height: 1 },
         //textShadowRadius: 5,
 
@@ -347,12 +362,13 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         paddingLeft: 10,
         paddingRight: 10,
-        backgroundColor: "rgba(177, 167, 156, 0.73)",
+        backgroundColor: "rgba(89, 160, 27, 0.5)",
         borderRadius: 20,
         shadowColor: 'red',
-        shadowOffset: {width: -2, height: 4},
+        shadowOffset: { width: -2, height: 4 },
         shadowOpacity: 0.2,
         shadowRadius: 3,
+        margin: 10
     },
 
     btnGetText: {
@@ -368,9 +384,13 @@ const styles = StyleSheet.create({
 
     btnBack: {
         paddingVertical: 20,
-        paddingLeft: 120,
+        paddingLeft: 50,
         paddingRight: 20,
-        //backgroundColor: "gray"
+        backgroundColor: "rgba(0, 0, 0, 0.5)",
+        borderBottomLeftRadius: 35,
+        borderTopLeftRadius: 35,
+        //borderColor: "#daa520",
+        //borderWidth: 1, 
     },
 
     modal: {
@@ -378,7 +398,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         //backgroundColor: "rgba(176, 165, 154, 0.83)", 
-        backgroundColor: "rgba(176, 165, 153, 1)", 
+        backgroundColor: "rgba(176, 165, 153, 1)",
         width: '95%',
         marginLeft: 10,
         marginTop: 75,
@@ -387,6 +407,25 @@ const styles = StyleSheet.create({
         //borderColor: '#daa520',
         borderColor: "white",
         opasity: 0
+    },
+
+    btnModal:{
+        paddingHorizontal: 20,
+        paddingVertical: 10,
+        backgroundColor: "rgba(0, 0, 0, 0.5)",
+        margin: 20,
+        borderRadius: 35
+    }, 
+
+    btnModalText: {
+        color: "#daa520",
+        fontSize: 20,
+        fontWeight: "bold",
+        textShadowColor: 'black',
+        textShadowOffset: { width: 1, height: 1 },
+        textShadowRadius: 5,
+        alignItems: 'center',
+        justifyContent: 'center',
     }
 
 })

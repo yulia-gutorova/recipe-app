@@ -1,4 +1,7 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useCallback} from "react"
+import { useFocusEffect } from '@react-navigation/native';
+import { useIsFocused } from '@react-navigation/native';
+
 import  {LinearGradient}  from "expo-linear-gradient";
 import {
     View,
@@ -19,43 +22,85 @@ import OneRecipe from "../components/OneRecipe";
 const Separator = () => <View style={styles.separator} />;
 
 const RecipesScreen = ({ navigation, route }) => {
+    
+    useFocusEffect(
+        useCallback((type) => {
+            console.log("inside useFocusEffect");
+            console.log("Type outside");
+            console.log(type);  
+          const getAllRecipes = async (type) => 
+        {
+            console.log("In get all recipes function");
+            const resp = await axios.get('https://recipe-app-server-production.up.railway.app/recipes')
+            .then(resp => {       
+                        console.log("Responce");
+                            console.log(resp.data);
+                            setRecipes(resp.data); 
+                            //let typeRecipes= resp.data.filter(item => item.type === type);
+                            //console.log("TypeRecipes");
+                            //console.log(typeRecipes);
+                            //setFilteredRecipes(typeRecipes); 
+                            })
 
-        let type = route.params.type;
+            .catch((error) => console.log('Error: ', error));
+        };  
+        getAllRecipes(type);
 
+        }, [isFocused])
+      );
+
+
+        let type = route.params.type;       
         const [recipes, setRecipes] = useState([]);
         const [filteredRecipes, setFilteredRecipes] = useState([]);
+        const [typeRecipe, setTypeRecipe] = useState([]);
 
-    useEffect(() => 
-    {
-        const getAllRecipes = async () => 
+        const isFocused = useIsFocused();
+        //setType(route.params.type);
+
+   /*   useEffect(() => 
+    { 
+        const getAllRecipes = async (type) => 
         {
+            console.log("inside useEffect");
             console.log("In get all recipes function");
             const resp = await axios.get('https://recipe-app-server-production.up.railway.app/recipes')
             .then(resp => {
                             //console.log("Responce");
                             //console.log(resp.data);
-                            setRecipes(resp.data); 
+                            //setRecipes(resp.data); 
                             let typeRecipes= resp.data.filter(item => item.type === type);
                             setFilteredRecipes(typeRecipes); 
                             })
 
             .catch((error) => console.log('Error: ', error));
         };  
-        getAllRecipes();
-    }, []); 
+        getAllRecipes(type);
 
+    }, []);   */
+ 
     //const completedBookings = response.data.filter((booking: Booking) => booking.status === false);
-    
-    console.log("Recipes:");
+
+    console.log("Recipes outside:");
     console.log(recipes);
-    console.log("Filtered recipes:");
-    console.log(filteredRecipes);
+    console.log("Type outside");
+    console.log(type);  
+    let typeRecipes= recipes.filter(item => item.type === type);
+    console.log("TypeRecipes");
+    console.log(typeRecipes);
+
+    //console.log("Filtered recipes outside functions:");
+    //console.log(filteredRecipes);
+
+    //=====================================================
     return (  
         <View style={styles.container}>
                 
 {/*                 <LinearGradient
                         colors={['rgba(217, 215, 215, 0.34)', 'rgba(163, 158, 158, 0.34)', 'black']}
                         style={styles.container}> */}
+
+            
 
             <View style={styles.titleContainer}>
                 <Text style={styles.text}>{type}</Text>
@@ -70,10 +115,12 @@ const RecipesScreen = ({ navigation, route }) => {
             </View>
 
             <View style={styles.flatlistContainer}>
+            <Text style={styles.text}>Text</Text>
+            
                 <FlatList
                         style={styles.flatlist}
                         keyExtractor={item => item.id}
-                        data={filteredRecipes}
+                        data={typeRecipes}
                         showsVerticalScrollIndicator
                         renderItem={({ item }) => {
 
@@ -81,7 +128,7 @@ const RecipesScreen = ({ navigation, route }) => {
                                 <Pressable  onPress={
                                                 () => navigation.navigate("RecipeDetail", {title: item.name, recipe:{item}})
                                             }>
-                                    <OneRecipe title={item.name} recipe={{item}}/>       
+                                    <OneRecipe key={item.id} title={item.name} recipe={{item}}/>       
                                 </Pressable>        
                             )
                      

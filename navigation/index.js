@@ -5,6 +5,7 @@ import HomeScreen from "../home/HomeScreen";
 import RecipesScreen from "../screens/RecipesScreen";
 import RecipeDetailScreen from "../screens/RecipeDetailScreen";
 import AddNewRecipeScreen from "../screens/AddNewRecipeScreen";
+import UpdateRecipeScreen from "../screens/UpdateRecipeScreen";
 
 export default function Navigation() {
 
@@ -38,6 +39,13 @@ export default function Navigation() {
                         component={AddNewRecipeScreen}
                         options={{headerShown: false}}
                         /> 
+
+                <Stack.Screen 
+                        name="Update"
+                        component={UpdateRecipeScreen}
+                        options={{headerShown: false}}
+                        /> 
+                        
                 </Stack.Navigator>
             </NavigationContainer>
     )

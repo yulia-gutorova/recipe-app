@@ -8,23 +8,31 @@ import {
     ScrollView,
 } from "react-native";
 
-import AddNewRecipeForm from "../components/AddNewRecipeForm";
+import UpdateRecipeForm from "../components/UpdateRecipeForm";
 
 import axios from "axios";
 
 
 const Separator = () => <View style={styles.separator} />;
 
-const AddNewRecipeScreen = ({ navigation }) => {
+const UpdateRecipeScreen = ({ navigation, route }) => {
 
+    let paramsRecipe= route.params.recipe; 
+    console.log("Params in UpdateRecipeScreen");
+    console.log(paramsRecipe);
 
-    const handleFormSubmit = (form) => 
+    const handleUpdateFormSubmit = (form) => 
     {
-        const createRecipe = async (form) => {
+
+        console.log("In handleUpdateFormSubmit");
+        console.log(form);
+        console.log(form._id);
+
+         const updateRecipe = async (form) => {
 
             let tagsArray = form.tags.split(" ");
 
-            let newRecipe = {
+            let updatedRecipe = {
             type: form.type,
             name: form.name,
             description: form.description,
@@ -36,19 +44,22 @@ const AddNewRecipeScreen = ({ navigation }) => {
             rates: form.rates,
             } 
 
-            console.log(newRecipe)
+            console.log(updatedRecipe)
 
-            const resp = await axios.post('https://recipe-app-server-production.up.railway.app/recipes', newRecipe)
-            .then
-            ( 
+                let url = 'https://recipe-app-server-production.up.railway.app/recipes/' + form._id;
+                console.log("URL");
+                console.log(url);
+                const resp = await axios.patch(url, updatedRecipe)
+                .then
+                ( 
 
-            )
-            .catch((error) => console.log('Error: ', error));
+                )
+                .catch((error) => console.log('Error: ', error)); 
         };
 
-        createRecipe(form);
+        updateRecipe(form);
 
-        switch (form.type) 
+/*         switch (form.type) 
         {
             case 'Soups':
                 navigation.push("Recipes", {type: "Soups"});
@@ -56,7 +67,7 @@ const AddNewRecipeScreen = ({ navigation }) => {
 
             default:
                 navigation.navigate("Home");
-        }
+        }  */
 
     }
 
@@ -65,7 +76,7 @@ const AddNewRecipeScreen = ({ navigation }) => {
         <View style={styles.container} >
 
             <View   style={[styles.miniContainer]}>
-                <AddNewRecipeForm onSubmit={handleFormSubmit}/>
+                <UpdateRecipeForm onSubmit={handleUpdateFormSubmit} recipe={paramsRecipe}/>
             </View>
 
             <View style={styles.btnContainer}>
@@ -74,7 +85,7 @@ const AddNewRecipeScreen = ({ navigation }) => {
                         <Pressable
                             style={styles.btnPressMe}
                             onPress={() => navigation.push("Home")}>
-                            <Text style={styles.btnText}>AddNewItemHome</Text>
+                            <Text style={styles.btnText}>UpdateItemHome</Text>
                         </Pressable>
 
                        
@@ -152,4 +163,4 @@ const styles = StyleSheet.create({
 
 })
 
-export default AddNewRecipeScreen
+export default UpdateRecipeScreen

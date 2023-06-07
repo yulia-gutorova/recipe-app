@@ -15,7 +15,7 @@ import RecipesScreen from "../screens/RecipesScreen";
 
 const HomeScreen = ({ navigation }) => {
 
-    const [type, setType] = useState('');
+    //const [type, setType] = useState('');
 
     return (
         <ImageBackground
@@ -87,7 +87,7 @@ const HomeScreen = ({ navigation }) => {
                         
                         <Pressable
                             style={[styles.btnPressMe,]}
-                            onPress={() => navigation.push("Recipes")}>
+                            onPress={() => navigation.push("AddNew")}>
                             <Text style={[styles.btnText, {color: "#daa520", marginLeft: 100}]}><Ionicons name="md-flower-sharp" size={20} color="#ff4500" /> ADD NEW</Text>
                         </Pressable>
             </View>
