@@ -39,7 +39,7 @@ const HomeScreen = ({ navigation }) => {
 
                         <Pressable
                             style={styles.btnPressMe}
-                            onPress={() => navigation.push("Recipes")}>
+                            onPress={() => navigation.push("Recipes", {type: "Salads"})}>
                             <Text style={styles.btnText}>Salads</Text>
                         </Pressable>
 
@@ -56,13 +56,13 @@ const HomeScreen = ({ navigation }) => {
 
                         <Pressable
                             style={styles.btnPressMe}
-                            onPress={() => navigation.push("Recipes")}>
+                            onPress={() => navigation.push("Recipes",  {type: "Main Dishes"})}>
                             <Text style={styles.btnText}>Main Dishes</Text>
                         </Pressable>
 
                         <Pressable
                             style={styles.btnPressMe}
-                            onPress={() => navigation.push("Recipes")}>
+                            onPress={() => navigation.push("Recipes" , {type: "Desserts"})}>
                             <Text style={styles.btnText}>Desserts</Text>
                         </Pressable>
 
@@ -71,7 +71,7 @@ const HomeScreen = ({ navigation }) => {
 
                         <Pressable
                             style={styles.btnPressMe}
-                            onPress={() => navigation.push("Recipes")}>
+                            onPress={() => navigation.push("Recipes", {type: "Vegetables"} )}>
                             <Text style={styles.btnText}>Vegetables</Text>
                         </Pressable>
 
@@ -79,7 +79,7 @@ const HomeScreen = ({ navigation }) => {
 
                         <Pressable
                             style={styles.btnPressMe}
-                            onPress={() => navigation.push("Recipes")}>
+                            onPress={() => navigation.push("Recipes", {type: "Holidays"})}>
                             <Text style={styles.btnText}>Holidays</Text>
                         </Pressable>
 
@@ -88,7 +88,7 @@ const HomeScreen = ({ navigation }) => {
                         <Pressable
                             style={[styles.btnPressMe,]}
                             onPress={() => navigation.push("AddNew")}>
-                            <Text style={[styles.btnText, {color: "#daa520", marginLeft: 100}]}><Ionicons name="md-flower-sharp" size={20} color="#ff4500" /> ADD NEW</Text>
+                            <Text style={[styles.btnText, {color: "#daa520", marginLeft: 40}]}><Ionicons name="md-flower-sharp" size={20} color="#ff4500" /> ADD NEW</Text>
                         </Pressable>
             </View>
 

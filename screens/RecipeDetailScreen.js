@@ -47,44 +47,43 @@ const RecipeDetailScreen = ({ navigation, route }) => {
 
 
             case 1: return (
-                <View style={styles.oneIngredient}>
+
                     <Text><AntDesign name="star" size={24} color="#daa520" /></Text>
-                </View>
+
             )
             case 2: return (
-                <View style={styles.oneIngredient}>
+
                     <Text><AntDesign name="star" size={24} color="#daa520" />
                         <AntDesign name="star" size={24} color="#daa520" />
                     </Text>
-                </View>
+
             )
             case 3: return (
-                <View style={styles.oneIngredient}>
+
                     <Text><AntDesign name="star" size={24} color="#daa520" />
                         <AntDesign name="star" size={24} color="#daa520" />
                         <AntDesign name="star" size={24} color="#daa520" />
                     </Text>
-                </View>
+
             )
             case 4: return (
-                <View style={styles.oneIngredient}>
+
                     <Text><AntDesign name="star" size={24} color="#daa520" />
                         <AntDesign name="star" size={24} color="#daa520" />
                         <AntDesign name="star" size={24} color="#daa520" />
                         <AntDesign name="star" size={24} color="#daa520" />
                     </Text>
-                </View>
+
             )
-            case 5: return (
-                <View style={styles.oneIngredient}>
-                    <Text><AntDesign name="star" size={24} color="#daa520" />
-                        <AntDesign name="star" size={24} color="#daa520" />
-                        <AntDesign name="star" size={24} color="#daa520" />                        <AntDesign name="star" size={24} color="#daa520" />
-                        <AntDesign name="star" size={24} color="#daa520" />
-                        <AntDesign name="star" size={24} color="#daa520" />
-                    </Text>
-                </View>
-            )
+            case 5: 
+                let string = "";
+                for (let i = 0; i < 5; i++){
+                    string =+ <AntDesign name="star" size={24} color="#daa520" />
+                }
+                return (
+                    <Text>
+                        {string}
+                    </Text>)
         }
     }
 
@@ -119,11 +118,11 @@ const RecipeDetailScreen = ({ navigation, route }) => {
                     <Text style={styles.detailText}>Cook time:  {route.params.recipe.item.cookTime} min</Text>
                     <Text style={styles.detailText}>Calories:  {route.params.recipe.item.calories}</Text>
 
-                    <View style={{ flexDirection: "row" }}>
+                    <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
                         <Tags t={route.params.recipe.item.tags}></Tags>
                     </View>
 
-                    <View style={{ flexDirection: "row" }}>
+                    <View style={[styles.oneIngredient, {flexDirection: "row"}]}>
                         <Rates r={route.params.recipe.item.rates}></Rates>
                     </View>
 

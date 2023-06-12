@@ -1,10 +1,14 @@
-import { Text, View, StyleSheet, TextInput, Pressable, ScrollView } from "react-native"
+import { Text, View, StyleSheet, TextInput, Pressable, ScrollView, KeyboardAvoidingView } from "react-native"
 import { RadioButton } from 'react-native-paper';
 import { useState } from "react"
 
+import CustomRadioButton from "./CustomRadioButton";
+
 const AddNewRecipeForm = ({ onSubmit }) => {
     //const [text, setText] = useState('Useless Text');
-    const [checked, setChecked] = useState('');
+    const [checkedCalories, setCheckedCalories] = useState('');
+    const [option, setOption] = useState(null);
+    const [checkedRate, setCheckedRate] = useState('');
 
     const [form, setForm] = useState({
         type: "",
@@ -26,7 +30,7 @@ const AddNewRecipeForm = ({ onSubmit }) => {
     }
 
     const onChangeRadioButton = (name, text) => {
-        setChecked('low')
+        setCheckedCalories(text);
         console.log("Form in onChangeradioButton:");
         console.log(name);
         console.log(text);
@@ -34,127 +38,213 @@ const AddNewRecipeForm = ({ onSubmit }) => {
         setForm({
             ...form,
             [name]: text
-        }) 
+        })
     }
+
+    const onChangeCustomRadioButton = (name, text) => {
+        console.log("Form in onChangeradioButton:");
+        console.log(name);
+        console.log(text);
+        console.log(form);
+        setForm({
+            ...form,
+            [name]: text
+        })
+    }
+
+    const onChangeRatesRadioButton = (name, text) => {
+        setCheckedRate(text);
+        console.log("Form in onChangeradioButton:");
+        console.log(name);
+        console.log(text);
+        console.log(form);
+        setForm({
+            ...form,
+            [name]: text
+        })
+    }
+
+
     console.log("Form in outside:");
     console.log(form);
-    
+
+    const types = ["Soups", "Salads", "Main dishes", "Desserts", 'Vegetables', "Holidays"];
 
     return (
         <View>
 
-            <ScrollView style={styles.container}>
-                <TextInput
-                    label="Type"
-                    placeholder="Type"
-                    style={styles.input}
-                    onChangeText={onChangeText("type")}
-                    value={form.type}
-                />
-                <TextInput
-                    label="Name"
-                    placeholder="Name"
-                    style={styles.input}
-                    onChangeText={onChangeText("name")}
-                    value={form.name}
-                />
-                <TextInput
-                    label="Desription"
-                    placeholder="Desription"
-                    multiline={true}
-                    style={styles.input}
-                    onChangeText={onChangeText("description")}
-                    value={form.description}
-                />
-                <TextInput
-                    label="Ingredients"
-                    placeholder="Ingredients"
-                    multiline={true}
-                    style={styles.input}
-                    onChangeText={onChangeText("ingredients")}
-                    value={form.ingredients}
-                />
-                <TextInput
-                    label="Tags"
-                    placeholder="Tags"
-                    style={styles.input}
-                    onChangeText={onChangeText("tags")}
-                    value={form.tags}
-                />
-                <TextInput
-                    label="Cook Time"
-                    placeholder="Cook Time"
-                    keyboardType="phone-pad"
-                    style={styles.input}
-                    onChangeText={onChangeText("cookTime")}
-                    value={form.cookTime}
-                />
-{/*                 <TextInput
+            <ScrollView  style={styles.container}>
+{/*             <KeyboardAvoidingView
+                    style={{ flex: 1 }}
+                    keyboardVerticalOffset={100}
+                    behavior={"position"}> */}
+                
+                <KeyboardAvoidingView behavior={"padding"}>
+
+                    <View style={styles.miniContainer}>
+                        <Text style={[styles.paragraph, {fontWeight:"bold"}]}>Choose type: </Text>
+                        <CustomRadioButton data={types} onSelect={(value) => onChangeCustomRadioButton("type", value)} />
+                    </View>
+
+                    <Text style={{fontWeight:"bold", marginLeft: 10}}>Name: </Text>
+                    <TextInput
+                        label="Name"
+                        style={styles.input}
+                        onChangeText={onChangeText("name")}
+                        value={form.name}
+                    />
+
+                    <Text style={{fontWeight:"bold", marginLeft: 10}}>Description: </Text>
+                    <TextInput
+                        label="Desription"
+                        multiline={true}
+                        style={[styles.input, {minHeight: 100}]}
+                        onChangeText={onChangeText("description")}
+                        value={form.description}
+                    />
+                    <Text style={{fontWeight:"bold", marginLeft: 10}}>Ingredients: </Text>
+                    <TextInput
+                        label="Ingredients"
+                        multiline={true}
+                        style={[styles.input, {minHeight: 100}]}
+                        onChangeText={onChangeText("ingredients")}
+                        value={form.ingredients}
+                    />
+                    <Text style={{fontWeight:"bold", marginLeft: 10}}>Tags: </Text>
+                    <TextInput
+                        label="Tags"
+                        style={styles.input}
+                        onChangeText={onChangeText("tags")}
+                        value={form.tags}
+                    />
+
+                    <Text style={{fontWeight:"bold", marginLeft: 10}}>Cook Time: </Text>
+                    <TextInput
+                        label="Cook Time"
+                        numeric
+                        keyboardType="phone-pad"
+                        style={styles.input}
+                        onChangeText={onChangeText("cookTime")}
+                        value={form.cookTime}
+                    />
+                    {/*                 <TextInput
                 label="Calories"
                 placeholder="Calories"
                 style={styles.input}
                 onChangeText={onChangeText("calories")}
                 value={form.calories}
                 />  */}
+                    <View style={styles.miniContainer}>
+                        <Text style={{fontWeight:"bold"}}>Calories: </Text>
 
-                <View style={styles.radioButtonsContainer}>
+                        <View style={styles.radioButtonsContainer}>
 
-                    <View>
-                        <Text>Low</Text>
-                        <RadioButton
-                            value="low"
-                            status={checked === 'low' ? 'checked' : 'unchecked'}
-                            onPress={(value) => onChangeRadioButton("Calories", "low")}
-                        />
+                            <View>
+                                <Text>Low</Text>
+                                <RadioButton
+                                    color="green"
+                                    value="low"
+                                    status={checkedCalories === 'low' ? 'checked' : 'unchecked'}
+                                    onPress={(value) => onChangeRadioButton("calories", "low")}
+                                />
+                            </View>
+
+                            <View>
+                                <Text>Medium</Text>
+                                <RadioButton
+                                    color="green"
+                                    value="medium"
+                                    status={checkedCalories === 'medium' ? 'checked' : 'unchecked'}
+                                    onPress={(value) => onChangeRadioButton("calories", "medium")}
+                                />
+                            </View>
+
+                            <View>
+                                <Text>High</Text>
+                                <RadioButton
+                                    color="green"
+                                    value="high"
+                                    status={checkedCalories === 'high' ? 'checked' : 'unchecked'}
+                                    onPress={() => onChangeRadioButton("calories", "high")}
+                                />
+                            </View>
+
+                        </View>
                     </View>
 
-                    <View>
-                        <Text>Medium</Text>
-                        <RadioButton
-                            value="medium"
-                            status={checked === 'medium' ? 'checked' : 'unchecked'}
-                            onPress={() => setChecked('medium')}
-                            onChangeText
-                        />
+                    <Text style={{fontWeight:"bold", marginLeft: 10}}>Directions: </Text>
+                    <TextInput
+                        label="Directions"
+                        multiline={true}
+                        style={styles.input}
+                        onChangeText={onChangeText("directions")}
+                        value={form.directions}
+                    />
+                    <View style={styles.miniContainer}>
+                        <Text style={{fontWeight:"bold"}}>Rates: </Text>
+
+                        <View style={styles.radioButtonsContainer}>
+
+                            <View>
+                                <Text style={{paddingLeft: 10}}>1</Text>
+                                <RadioButton
+                                    color="red"
+                                    value="1"
+                                    status={checkedRate === '1' ? 'checked' : 'unchecked'}
+                                    onPress={(value) => onChangeRatesRadioButton("rates", "1")}
+                                />
+                            </View>
+
+                            <View>
+                                <Text style={{paddingLeft: 10}}>2</Text>
+                                <RadioButton
+                                    color="red"
+                                    value="2"
+                                    status={checkedRate === '2' ? 'checked' : 'unchecked'}
+                                    onPress={(value) => onChangeRatesRadioButton("rates", "2")}
+                                />
+                            </View>
+
+                            <View>
+                                <Text style={{paddingLeft: 10}}>3</Text>
+                                <RadioButton
+                                    color="red"
+                                    value="3"
+                                    status={checkedRate === '3' ? 'checked' : 'unchecked'}
+                                    onPress={() => onChangeRatesRadioButton("rates", "3")}
+                                />
+                            </View>
+
+                            <View>
+                                <Text style={{paddingLeft: 10}}>4</Text>
+                                <RadioButton
+                                    color="red"
+                                    value="4"
+                                    status={checkedRate === '4' ? 'checked' : 'unchecked'}
+                                    onPress={() => onChangeRatesRadioButton("rates", "4")}
+                                />
+                            </View>
+
+                            <View>
+                                <Text style={{paddingLeft: 10}}>5</Text>
+                                <RadioButton
+                                    color="red"
+                                    value="5"
+                                    status={checkedRate === '5' ? 'checked' : 'unchecked'}
+                                    onPress={() => onChangeRatesRadioButton("rates", "5")}
+                                />
+                            </View>
+
+                        </View>
                     </View>
 
-                    <View>
-                        <Text>High</Text>
-                        <RadioButton
-                            label="High"
-                            value="high"
-                            status={checked === 'high' ? 'checked' : 'unchecked'}
-                            onPress={() => setChecked('high')}
-                        />
-                    </View>
-
-                </View>
-
-                <TextInput
-                    label="Directions"
-                    placeholder="Directions"
-                    multiline={true}
-                    style={styles.input}
-                    onChangeText={onChangeText("directions")}
-                    value={form.directions}
-                />
-                <TextInput
-                    label="Rates"
-                    placeholder="Rates"
-                    keyboardType="phone-pad"
-                    style={styles.input}
-                    onChangeText={onChangeText("rates")}
-                    value={form.rates}
-                />
-
-
+                    <Pressable
+                        style={styles.btnPressMe}
+                        onPress={() => onSubmit(form)}>
+                        <Text style={styles.btnText}>Submit</Text>
+                    </Pressable>
+                </KeyboardAvoidingView>
             </ScrollView>
-
-            <Pressable
-                style={styles.btnPressMe}
-                onPress={() => onSubmit(form)}>
-                <Text style={styles.btnText}>Submit</Text>
-            </Pressable>
 
         </View>
 
@@ -162,11 +252,22 @@ const AddNewRecipeForm = ({ onSubmit }) => {
 }
 
 const styles = StyleSheet.create({
+
     container: {
         flex: 0.8,
         padding: 20,
-        backgroundColor: "gray",
-        width: 420
+        backgroundColor: "rgba(176, 165, 153, 1)",
+        width: 420,
+        //paddingBottom: 200
+    },
+
+    miniContainer: {
+        flex: 0.8,
+        padding: 20,
+        //backgroundColor: "rgba(71, 96, 102, 0.18)",
+        width: 400,
+        alignSelf: 'center',
+        //marginBottom: 20
     },
 
     radioButtonsContainer: {
@@ -180,6 +281,27 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         padding: 10,
     },
+
+    btnPressMe: {
+        alignSelf: 'center',
+        width: 200,
+        paddingHorizontal: 20,
+        paddingVertical: 10,
+        alignItems: "center",
+        //backgroundColor: "rgba(0, 0, 0, 0.5)",
+        marginBottom: 150,
+    },
+
+    btnText: {
+        color: "#daa520",
+        fontSize: 24,
+        fontWeight: "bold",
+        textShadowColor: 'black',
+        textShadowOffset: { width: 1, height: 1 },
+        textShadowRadius: 5,
+        alignItems: 'center',
+        justifyContent: 'center',
+    }
 })
 
 export default AddNewRecipeForm;

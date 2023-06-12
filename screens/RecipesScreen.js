@@ -22,41 +22,39 @@ import OneRecipe from "../components/OneRecipe";
 const Separator = () => <View style={styles.separator} />;
 
 const RecipesScreen = ({ navigation, route }) => {
-    
-    useFocusEffect(
-        useCallback((type) => {
-            console.log("inside useFocusEffect");
-            console.log("Type outside");
-            console.log(type);  
-          const getAllRecipes = async (type) => 
-        {
-            console.log("In get all recipes function");
-            const resp = await axios.get('https://recipe-app-server-production.up.railway.app/recipes')
-            .then(resp => {       
-                        console.log("Responce");
-                            console.log(resp.data);
-                            setRecipes(resp.data); 
-                            //let typeRecipes= resp.data.filter(item => item.type === type);
-                            //console.log("TypeRecipes");
-                            //console.log(typeRecipes);
-                            //setFilteredRecipes(typeRecipes); 
-                            })
 
-            .catch((error) => console.log('Error: ', error));
-        };  
-        getAllRecipes(type);
+    //-----------------------------------------------------
+    //useFocusEffect to get all recipes when navigating to RecipeScreen
+    //-----------------------------------------------------
+        useFocusEffect(
+            useCallback((type) => {
+                console.log("inside useFocusEffect");
+                console.log("Type outside");
+                console.log(type);  
+            const getAllRecipes = async (type) => 
+            {
+                console.log("In get all recipes function");
+                const resp = await axios.get('https://recipe-app-server-production.up.railway.app/recipes')
+                .then(resp => {       
+                            console.log("Responce");
+                                console.log(resp.data);
+                                setRecipes(resp.data); 
+                                })
 
-        }, [isFocused])
+                .catch((error) => console.log('Error: ', error));
+            };  
+            getAllRecipes(type);
+
+            }, [isFocused])
       );
+    //-----------------------------------------------------
 
-
-        let type = route.params.type;       
+        let type = route.params.type; 
+             
         const [recipes, setRecipes] = useState([]);
         const [filteredRecipes, setFilteredRecipes] = useState([]);
-        const [typeRecipe, setTypeRecipe] = useState([]);
-
+        //const [typeRecipes, setTypeRecipes] = useState([]);
         const isFocused = useIsFocused();
-        //setType(route.params.type);
 
    /*   useEffect(() => 
     { 
@@ -79,15 +77,13 @@ const RecipesScreen = ({ navigation, route }) => {
 
     }, []);   */
  
-    //const completedBookings = response.data.filter((booking: Booking) => booking.status === false);
 
     console.log("Recipes outside:");
     console.log(recipes);
-    console.log("Type outside");
-    console.log(type);  
     let typeRecipes= recipes.filter(item => item.type === type);
-    console.log("TypeRecipes");
-    console.log(typeRecipes);
+    console.log("typeRecipe outside");
+    console.log(typeRecipes); 
+    //console.log(typeRecipes);
 
     //console.log("Filtered recipes outside functions:");
     //console.log(filteredRecipes);
@@ -95,13 +91,6 @@ const RecipesScreen = ({ navigation, route }) => {
     //=====================================================
     return (  
         <View style={styles.container}>
-                
-{/*                 <LinearGradient
-                        colors={['rgba(217, 215, 215, 0.34)', 'rgba(163, 158, 158, 0.34)', 'black']}
-                        style={styles.container}> */}
-
-            
-
             <View style={styles.titleContainer}>
                 <Text style={styles.text}>{type}</Text>
             </View>
@@ -115,8 +104,8 @@ const RecipesScreen = ({ navigation, route }) => {
             </View>
 
             <View style={styles.flatlistContainer}>
-            <Text style={styles.text}>Text</Text>
-            
+
+                {typeRecipes.length === 0 ? <Text style={styles.text}>You still don't have any  recipes here.</Text> : null}
                 <FlatList
                         style={styles.flatlist}
                         keyExtractor={item => item.id}
@@ -188,8 +177,8 @@ const styles = StyleSheet.create({
 
     flatlistContainer:{
         flex: 0.8,
-        marginTop: 20,
-        backgroundColor: "gray",
+        marginTop: 30,
+        backgroundColor: "rgba(0, 0, 0, 0.62)",
         width: "100%",
         alignItems: 'center',
         justifyContent: 'center',
@@ -239,6 +228,7 @@ const styles = StyleSheet.create({
         paddingRight: 20,
         //backgroundColor: "gray", 
     },
+
     image: {
         width: "100%",
         height: 200,

@@ -6,7 +6,10 @@ import {
     ImageBackground,
     Pressable,
     ScrollView,
+    KeyboardAvoidingView, 
+    
 } from "react-native";
+import { Entypo } from '@expo/vector-icons';
 
 import AddNewRecipeForm from "../components/AddNewRecipeForm";
 
@@ -51,8 +54,11 @@ const AddNewRecipeScreen = ({ navigation }) => {
         switch (form.type) 
         {
             case 'Soups':
-                navigation.push("Recipes", {type: "Soups"});
+                navigation.push("Recipes", {type: form.type});
                 break;
+            case 'Soups':
+                navigation.push("Recipes", {type: form.type});
+                break;    
 
             default:
                 navigation.navigate("Home");
@@ -62,26 +68,37 @@ const AddNewRecipeScreen = ({ navigation }) => {
 
     //=====================================================
     return (
-        <View style={styles.container} >
+/*          <KeyboardAvoidingView behavior={"height"}
+        keyboardVerticalOffset={1000}
+        enabled={false} 
+        style={styles.container} >  */
 
-            <View   style={[styles.miniContainer]}>
+        <KeyboardAvoidingView 
+        behavior={"height"}
+        keyboardVerticalOffset={0}
+        enabled={false} 
+        style={styles.container} >  
+
+
+            <View style={styles.titleContainer}>
+                <Text style={styles.text}>Add a new recipe</Text>
+            </View>
+
+            <View style={[styles.miniContainer]}>
                 <AddNewRecipeForm onSubmit={handleFormSubmit}/>
             </View>
 
             <View style={styles.btnContainer}>
-
-                        <Separator/>
-                        <Pressable
-                            style={styles.btnPressMe}
-                            onPress={() => navigation.push("Home")}>
-                            <Text style={styles.btnText}>AddNewItemHome</Text>
-                        </Pressable>
-
-                       
+                <Separator/>
+                <Pressable
+                    style={styles.btnPressMe}
+                    onPress={() => navigation.push("Home")}>
+                    <Text style={styles.btnText}><Entypo name="arrow-bold-left" size={24} color="#daa520" /> Home</Text>
+                </Pressable>     
             </View>
 
 
-        </View>
+        </KeyboardAvoidingView>
     )
 }
 
@@ -95,24 +112,30 @@ const styles = StyleSheet.create({
     },
 
     btnContainer: {
-        flex:0.2,
+        flex: 0.1,
         width: "100%",
-        //alignItems: 'center',
-        //justifyContent: 'center',
-        //backgroundColor: "rgba(71, 53, 29, 0.83)",
-        //backgroundColor: "rgba(74, 38, 0, 0.83)",
-        backgroundColor: "rgba(71, 32, 14, 0.83)",
-        borderTopLeftRadius: 300,
-        borderTopRightRadius: 100,
-        opacity: 0.8   
+        backgroundColor: "rgba(108, 56, 32, 0.83)",
+        alignItems: 'flex-end',
+        justifyContent: 'center',
     },
 
     miniContainer: {
-        flex: 0.9,
-        width: "50%",
+        flex: 0.8,
+        //width: "50%",
         alignItems: 'flex-start',
         justifyContent: 'flex-start',
-        paddingTop: 50
+        //backgroundColor: "green",
+        //paddingBottom: 80
+        
+    },
+
+    titleContainer: {
+        flex: 0.1,
+        width: "100%",
+        alignItems: 'flex-start',
+        justifyContent: 'flex-start',
+        backgroundColor: "rgba(89, 31, 5, 0.83)",
+        //opacity: 0.8
     },
 
     text: {
@@ -128,13 +151,13 @@ const styles = StyleSheet.create({
     },
 
     btnText: {
-        color: "white",
+        color: "#daa520",
         fontSize: 24,
         fontWeight: "bold",
         textShadowColor: 'black',
         textShadowOffset: { width: 1, height: 1 },
         textShadowRadius: 5,
-        marginLeft: 130,
+        //marginLeft: 130,
         //backgroundColor: "white",
         width: "80%"
     },
@@ -144,10 +167,10 @@ const styles = StyleSheet.create({
     },
 
     btnPressMe: {
-        //textAlign: "center",
-        paddingVertical: 20,
-        paddingHorizontal: 100,
-        //backgroundColor: "gray"
+        paddingVertical: 10,
+        paddingLeft: 120,
+        paddingRight: 20,
+        //backgroundColor: "gray", 
     },
 
 })

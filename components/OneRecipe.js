@@ -12,7 +12,7 @@ const OneRecipe = ({ recipe }) => {
 
   return (
     <View style={styles.item}>
-        <Text style={styles.title}>{recipe.item.name}</Text>
+        <Text style={styles.title} key={recipe.item._id}>{recipe.item.name}</Text>
     </View>
   )
 };
