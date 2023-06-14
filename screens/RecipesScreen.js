@@ -1,8 +1,8 @@
-import { useEffect, useState, useCallback} from "react"
-import { useFocusEffect } from '@react-navigation/native';
-import { useIsFocused } from '@react-navigation/native';
+import React from 'react';
+import { useState, useCallback} from "react"
+import { useFocusEffect, useIsFocused } from '@react-navigation/native';
+//import { useIsFocused } from '@react-navigation/native';
 
-import  {LinearGradient}  from "expo-linear-gradient";
 import {
     View,
     Text,
@@ -18,13 +18,12 @@ import axios from "axios";
 
 import OneRecipe from "../components/OneRecipe";
 
-
-const Separator = () => <View style={styles.separator} />;
-
+//---------------------------------------------------------
 const RecipesScreen = ({ navigation, route }) => {
 
     //-----------------------------------------------------
-    //useFocusEffect to get all recipes when navigating to RecipeScreen
+    //useFocusEffect to get all recipes when navigating 
+    //to RecipeScreen
     //-----------------------------------------------------
         useFocusEffect(
             useCallback((type) => {
@@ -54,37 +53,12 @@ const RecipesScreen = ({ navigation, route }) => {
         console.log(route.params.image); 
 
         const [recipes, setRecipes] = useState([]);
-        const [filteredRecipes, setFilteredRecipes] = useState([]);
-        //const [typeRecipes, setTypeRecipes] = useState([]);
+        //const [filteredRecipes, setFilteredRecipes] = useState([]);
+
         const isFocused = useIsFocused();
-
-   /*   useEffect(() => 
-    { 
-        const getAllRecipes = async (type) => 
-        {
-            console.log("inside useEffect");
-            console.log("In get all recipes function");
-            const resp = await axios.get('https://recipe-app-server-production.up.railway.app/recipes')
-            .then(resp => {
-                            //console.log("Responce");
-                            //console.log(resp.data);
-                            //setRecipes(resp.data); 
-                            let typeRecipes= resp.data.filter(item => item.type === type);
-                            setFilteredRecipes(typeRecipes); 
-                            })
-
-            .catch((error) => console.log('Error: ', error));
-        };  
-        getAllRecipes(type);
-
-    }, []);   */
  
+        let typeRecipes= recipes.filter(item => item.type === type);
 
-    console.log("Recipes outside:");
-    console.log(recipes);
-    let typeRecipes= recipes.filter(item => item.type === type);
-    console.log("typeRecipe outside");
-    console.log(typeRecipes); 
 
     //=====================================================
     return (  
@@ -110,31 +84,26 @@ const RecipesScreen = ({ navigation, route }) => {
                         keyExtractor={item => item.id}
                         data={typeRecipes}
                         showsVerticalScrollIndicator
-                        renderItem={({ item }) => {
-
+                        renderItem={({ item }) => 
+                        {
                             return(
-                                <Pressable  onPress={
-                                                () => navigation.navigate("RecipeDetail", {title: item.name, recipe:{item}})
-                                            }>
+                                <Pressable  onPress={() => navigation.navigate("RecipeDetail", {title: item.name, recipe:{item}})}>
                                     <OneRecipe key={item.id} title={item.name} recipe={{item}}/>       
                                 </Pressable>        
                             )
-                     
                         }
                         }
-                    />
+                />
             </View>
             
             <View style={styles.btnContainer}>
-
                 <Pressable
                     style={styles.btnPressMe}
                     onPress={() => navigation.push("Home")}>
-                    <Text style={styles.btnText}><Entypo name="arrow-bold-left" size={24} color="#daa520" /> Home</Text>
+                    <Text style={styles.btnText}><Entypo name="arrow-bold-left" size={24} color="#daa520"/> Home</Text>
                 </Pressable>
             </View>
 
-{/* </LinearGradient> */}
         </View>
     )
 }
@@ -146,22 +115,15 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: "rgba(237, 230, 224, 0.83)",
-        //backgroundColor: "black",
         width: "100%",
     },
 
     btnContainer: {
         flex: 0.2,
         width: "100%",
-        //alignItems: 'center',
-        //justifyContent: 'center',
-        //backgroundColor: "rgba(71, 53, 29, 0.83)",
-        //backgroundColor: "rgba(74, 38, 0, 0.83)",
         backgroundColor: "rgba(108, 56, 32, 0.83)",
-        //opacity: 0.8,
         alignItems: 'flex-end',
         justifyContent: 'center',
-        //backgroundColor: "gray",
     },
 
     titleContainer: {
@@ -171,7 +133,6 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         paddingTop: 0,
         backgroundColor: "rgba(89, 31, 5, 0.83)",
-        //opacity: 0.8
     },
 
     flatlistContainer:{
@@ -197,7 +158,6 @@ const styles = StyleSheet.create({
         color: "#daa520",
         fontStyle: "italic",
         fontWeight: "bold",
-        //marginLeft: 20,
         textAlign: "right",
         marginTop: 25,
         marginLeft: 10,
@@ -214,18 +174,12 @@ const styles = StyleSheet.create({
         textShadowOffset: { width: 1, height: 1 },
         textShadowRadius: 5,
         marginLeft: 0,
-        //backgroundColor: "white",
-    },
-
-    separator: {
-        marginVertical: 20,
     },
 
     btnPressMe: {
         paddingVertical: 10,
         paddingLeft: 120,
         paddingRight: 20,
-        //backgroundColor: "gray", 
     },
 
     image: {

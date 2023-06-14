@@ -1,5 +1,4 @@
-import { LinearGradient } from "expo-linear-gradient";
-import React, {useEffect, useRef, useState} from 'react';
+import React from 'react';
 import { Ionicons } from '@expo/vector-icons'; 
 
 import {
@@ -11,30 +10,22 @@ import {
 } from "react-native";
 
 const Separator = () => <View style={styles.separator} />;
-import RecipesScreen from "../screens/RecipesScreen";
 
+//---------------------------------------------------------
 const HomeScreen = ({ navigation }) => {
 
-    //const [type, setType] = useState('');
-
+    //=====================================================
     return (
         <ImageBackground
                 source={require('../assets/home-image.png')}
                 style={styles.container} >
 
-            <View   style={[styles.miniContainer,           
-/*                              {
-                                transform: [{skewX: '40deg'}, {skewY: '30deg'},],
-                              }, */
-                          ]}>
-
+            <View   style={[styles.miniContainer]}>
                 <Text style={styles.text}>My</Text>
                 <Text style={styles.text}>Cookbook</Text>
-
             </View>
 
             <View style={styles.btnContainer}>
-
                         <Separator/>
 
                         <Pressable
@@ -53,7 +44,6 @@ const HomeScreen = ({ navigation }) => {
 
                         <Separator/>
 
-
                         <Pressable
                             style={styles.btnPressMe}
                             onPress={() => navigation.push("Recipes",  {type: "Main Dishes"})}>
@@ -67,7 +57,6 @@ const HomeScreen = ({ navigation }) => {
                         </Pressable>
 
                         <Separator/>
-
 
                         <Pressable
                             style={styles.btnPressMe}
@@ -92,7 +81,6 @@ const HomeScreen = ({ navigation }) => {
                         </Pressable>
             </View>
 
-
         </ImageBackground>
     )
 }
@@ -109,13 +97,6 @@ const styles = StyleSheet.create({
     btnContainer: {
         flex: 1,
         width: "100%",
-        //alignItems: 'center',
-        //justifyContent: 'center',
-        //backgroundColor: "rgba(71, 53, 29, 0.83)",
-        //backgroundColor: "rgba(74, 38, 0, 0.83)",
-        //backgroundColor: "rgba(71, 32, 14, 0.83)",
-        //borderTopLeftRadius: 300,
-        //borderTopRightRadius: 100,
         opacity: 0.8   
     },
 
@@ -147,7 +128,6 @@ const styles = StyleSheet.create({
         textShadowOffset: { width: 1, height: 1 },
         textShadowRadius: 5,
         marginLeft: 60,
-        //backgroundColor: "white",
         width: "80%"
     },
 
@@ -156,12 +136,8 @@ const styles = StyleSheet.create({
     },
 
     btnPressMe: {
-        //textAlign: "center",
         paddingVertical: 10,
         paddingLeft: 100,
-        //backgroundColor: "gray",
-        //borderColor: "black",
-        //borderWidth: 1
     },
 
 
