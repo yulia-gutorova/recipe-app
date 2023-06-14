@@ -127,8 +127,60 @@
       "calories": "low",
       "directions": "In a large skillet set over medium heat, add 3 tablespoons of water along with the olive oil and salt. When the water begins to steam, add the broccolini and toss to coat. Cover and cook until the liquid has mostly evaporated and broccolini is bright green and almost tender, about 5 minutes. Remove the lid and add the butter and garlic. Increase the heat to high. Cook until the garlic is fragrant and golden brown and the broccolini is tender, about 3-5 minutes. Transfer to a plate, sprinkle with flaky salt and serve immediately.",
       "rates":"4"
+    },
+    {
+      "type": "Holidays",
+      "name": "Christmas pie",
+      "description": "Combine a few key Christmas flavours here to make a pie that both children and adults will adore",
+      "ingredients": [
+        "2 tbsp olive oil", "knob butter", "1 onion, finely chopped", "500g sausagemeat or skinned sausages", "grated zest of 1 lemon", "100g fresh white breadcrumbs", "85g ready-to-eat dried apricots, chopped", "50g chestnut, canned or vacuum-packed, chopped", "2 tsp chopped fresh or 1tsp dried thyme", "100g cranberries, fresh or frozen", "500g boneless, skinless chicken breasts", "500g pack ready-made shortcrust pastry", "beaten egg, to glaze"],
+      "tags": ["pie", "Christmas", "sausage", "parmesan"],
+      "cookTime": "60",
+      "calories": "low",
+      "directions": "Heat oven to 190C/fan 170C/gas 5. Heat 1 tbsp oil and the butter in a frying pan, then add the onion and fry for 5 mins until softened. Cool slightly. Tip the sausagemeat, lemon zest, breadcrumbs, apricots, chestnuts and thyme into a bowl. Add the onion and cranberries, and mix everything together with your hands, adding plenty of pepper and a little salt.",
+      "rates":"4"
+    },
+    {
+      "type": "Main Dishes",
+      "name": "Smoked salmon",
+      "description": "These non-scary, freezer-friendly souffl\u00e9s can be baked ahead, then reheated in the oven before serving",
+      "ingredients": [
+        "40g butter", 
+        "25g plain flour", 
+        "300ml milk", 
+        "85g Philadelphia cheese", 
+        "2 tsp chopped dill", 
+        "3 large eggs, separated", 
+        "85g smoked salmon, chopped", 
+        "zest \u00bd lemon", 
+        "6 tsp cr\u00e8me fra\u00eeche",
+         "2 large slices smoked salmon", 
+         "dillsprigs"],
+      "tags": ["pie", "Christmas", "sausage", "parmesan"],
+      "cookTime": "60",
+      "calories": "low",
+      "directions": "Put the butter, flour and milk in a pan and cook, stirring over the heat until thickened. Stir in the cheese, in small spoonfuls, and the dill; season to taste, then beat to incorporate. Heat oven to 200C/180C fan/gas 6. Butter 6 x 150ml souffl\u00e9 dishes and line the base with baking paper. Stir the egg yolks into the sauce, add the chopped salmon and lemon. Whisk the egg whites until stiff, then carefully fold into the salmon mix. Spoon into the dishes and bake in a tin half-filled with cold water for 15 mins until risen and golden. Cool; don\u2019t worry if they sink. To freeze, cool completely, then overwrap the dishes with baking paper and foil. They will keep in the freezer for 6 weeks. Thaw for 5 hrs in the fridge. When ready to serve, very carefully turn the souffl\u00e9s out of their dishes, peel off the lining paper and place on squares of baking paper. Top with the cr\u00e8me fra\u00eeche and bake for 10-15 mins at 200C/180C fan/gas 6 until the souffl\u00e9s start to puff up. Quickly top each with a frill of salmon and a dill sprig. Serve on their own or with some dressed salad leaves.",
+      "rates":"5"
+    },
+    {
+      "type": "Salads",
+      "name": "Italian Chopped Salad",
+      "description": "This chopped salad is so flavorful that even salad skeptics will pile their plates with seconds! ",
+      "ingredients": [
+        "Iceberg lettuce and radicchio ", 
+        "Red onion", 
+        "Cherry tomatoes", 
+        "Chickpeas", 
+        "Pearl mozzarella and provolone cheese ", 
+        "Pepperoncini", 
+        "A lemon vinaigrette", 
+        "Dried oregano"],
+      "tags": ["cheese", "italian", "summer"],
+      "cookTime": "20",
+      "calories": "low",
+      "directions": "Whisk together the salad dressing ingredients, chop up the veggies.",
+      "rates":"4"
     }
-
 
    
   ]

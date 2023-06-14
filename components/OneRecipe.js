@@ -1,6 +1,5 @@
 import { View, StyleSheet, Text, Image } from "react-native"
 import React from "react"
-import { NativeStackHeaderProps } from "@react-navigation/native-stack";
 
 const OneRecipe = ({ recipe }) => {
   console.log("Recipe");

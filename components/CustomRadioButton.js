@@ -2,11 +2,12 @@ import React from 'react';
 import { View, Text, Pressable, StyleSheet } from 'react-native';
 import { useState } from "react"
 
-export default function CustomRadioButton({ data, onSelect }) {
+export default function CustomRadioButton({ data, option, onSelect }) {
     console.log("types in RadioButton");
     console.log(data);
+    console.log(option);
 
-    const [userOption, setUserOption] = useState(null);
+    const [userOption, setUserOption] = useState(option);
     const [selected, setSelected] = useState(null);
 
     const selectHandler = (value) => {

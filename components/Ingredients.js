@@ -2,10 +2,10 @@ import {View, Text, StyleSheet} from "react-native"
 
 const Ingredients = ({ ing }) => {
     return (
-        ing.map(ingredient =>
+        ing.map((ingredient, index) =>
         (
             <View style={styles.oneIngredient}>
-                <Text style={styles.oneIngredientText}>{ingredient}</Text>
+                <Text key={index} style={styles.oneIngredientText}>{ingredient}</Text>
             </View>
         ))
     )

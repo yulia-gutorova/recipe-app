@@ -49,8 +49,10 @@ const RecipesScreen = ({ navigation, route }) => {
       );
     //-----------------------------------------------------
 
-        let type = route.params.type; 
-             
+        let type = route.params.type;
+        console.log("Image");
+        console.log(route.params.image); 
+
         const [recipes, setRecipes] = useState([]);
         const [filteredRecipes, setFilteredRecipes] = useState([]);
         //const [typeRecipes, setTypeRecipes] = useState([]);
@@ -83,10 +85,6 @@ const RecipesScreen = ({ navigation, route }) => {
     let typeRecipes= recipes.filter(item => item.type === type);
     console.log("typeRecipe outside");
     console.log(typeRecipes); 
-    //console.log(typeRecipes);
-
-    //console.log("Filtered recipes outside functions:");
-    //console.log(filteredRecipes);
 
     //=====================================================
     return (  
@@ -96,11 +94,12 @@ const RecipesScreen = ({ navigation, route }) => {
             </View>
             
             <View style={styles.imageContainer}>
-                <Image               
-                        source={require('../assets/vegetables-image.png')}
-                        style={styles.image}>
-
-                </Image>
+                {type === "Vegetables" ? <Image source={require('../assets/vegetables-image.png')}style={styles.image}></Image>: null}
+                {type === "Soups" ? <Image source={require('../assets/soup-image.png')}style={styles.image}></Image>: null}
+                {type === "Salads" ? <Image source={require('../assets/salad-image.png')}style={styles.image}></Image>: null}
+                {type === "Main Dishes" ? <Image source={require('../assets/main-dishes-image.png')}style={styles.image}></Image>: null}
+                {type === "Desserts" ? <Image source={require('../assets/desserts-image.png')}style={styles.image}></Image>: null}
+                {type === "Holidays" ? <Image source={require('../assets/holidays-image.png')}style={styles.image}></Image>: null}
             </View>
 
             <View style={styles.flatlistContainer}>

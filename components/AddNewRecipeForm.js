@@ -102,7 +102,8 @@ const AddNewRecipeForm = ({ onSubmit }) => {
                         onChangeText={onChangeText("description")}
                         value={form.description}
                     />
-                    <Text style={{fontWeight:"bold", marginLeft: 10}}>Ingredients: </Text>
+
+                    <Text style={{fontWeight:"bold", marginLeft: 10}}>Ingredients (split with /): </Text>
                     <TextInput
                         label="Ingredients"
                         multiline={true}
@@ -110,7 +111,7 @@ const AddNewRecipeForm = ({ onSubmit }) => {
                         onChangeText={onChangeText("ingredients")}
                         value={form.ingredients}
                     />
-                    <Text style={{fontWeight:"bold", marginLeft: 10}}>Tags: </Text>
+                    <Text style={{fontWeight:"bold", marginLeft: 10}}>Tags (split with space): </Text>
                     <TextInput
                         label="Tags"
                         style={styles.input}
@@ -127,13 +128,7 @@ const AddNewRecipeForm = ({ onSubmit }) => {
                         onChangeText={onChangeText("cookTime")}
                         value={form.cookTime}
                     />
-                    {/*                 <TextInput
-                label="Calories"
-                placeholder="Calories"
-                style={styles.input}
-                onChangeText={onChangeText("calories")}
-                value={form.calories}
-                />  */}
+
                     <View style={styles.miniContainer}>
                         <Text style={{fontWeight:"bold"}}>Calories: </Text>
 
@@ -176,10 +171,11 @@ const AddNewRecipeForm = ({ onSubmit }) => {
                     <TextInput
                         label="Directions"
                         multiline={true}
-                        style={styles.input}
+                        style={[styles.input, {minHeight: 100}]}
                         onChangeText={onChangeText("directions")}
                         value={form.directions}
                     />
+                    
                     <View style={styles.miniContainer}>
                         <Text style={{fontWeight:"bold"}}>Rates: </Text>
 

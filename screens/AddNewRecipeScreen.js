@@ -1,4 +1,3 @@
-import { LinearGradient } from "expo-linear-gradient";
 import {
     View,
     Text,
@@ -10,14 +9,12 @@ import {
     
 } from "react-native";
 import { Entypo } from '@expo/vector-icons';
-
 import AddNewRecipeForm from "../components/AddNewRecipeForm";
-
 import axios from "axios";
-
 
 const Separator = () => <View style={styles.separator} />;
 
+//---------------------------------------------------------
 const AddNewRecipeScreen = ({ navigation }) => {
 
 
@@ -26,43 +23,28 @@ const AddNewRecipeScreen = ({ navigation }) => {
         const createRecipe = async (form) => {
 
             let tagsArray = form.tags.split(" ");
+            let ingredientsArray = form.ingredients.split("/");
 
             let newRecipe = {
-            type: form.type,
-            name: form.name,
-            description: form.description,
-            ingredients: form.ingredients,
-            tags: tagsArray,
-            cookTime: form.cookTime,
-            calories: form.calories,
-            directions: form.directions,
-            rates: form.rates,
+                type: form.type,
+                name: form.name,
+                description: form.description,
+                ingredients: ingredientsArray,
+                tags: tagsArray,
+                cookTime: form.cookTime,
+                calories: form.calories,
+                directions: form.directions,
+                rates: form.rates,
             } 
 
             console.log(newRecipe)
 
             const resp = await axios.post('https://recipe-app-server-production.up.railway.app/recipes', newRecipe)
-            .then
-            ( 
-
-            )
+            .then( navigation.push("Recipes", {type: form.type}))
             .catch((error) => console.log('Error: ', error));
         };
-
+        
         createRecipe(form);
-
-        switch (form.type) 
-        {
-            case 'Soups':
-                navigation.push("Recipes", {type: form.type});
-                break;
-            case 'Soups':
-                navigation.push("Recipes", {type: form.type});
-                break;    
-
-            default:
-                navigation.navigate("Home");
-        }
 
     }
 
