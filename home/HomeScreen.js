@@ -30,7 +30,7 @@ const HomeScreen = ({ navigation }) => {
 
                         <Pressable
                             style={styles.btnPressMe}
-                            onPress={() => navigation.push("Recipes", {type: "Salads"})}>
+                            onPress={() => navigation.push("Recipes", {type: "Salads", path: "'../assets/vegetables-image.png'"})}>
                             <Text style={styles.btnText}>Salads</Text>
                         </Pressable>
 
@@ -75,9 +75,9 @@ const HomeScreen = ({ navigation }) => {
                         <Separator/>
                         
                         <Pressable
-                            style={[styles.btnPressMe,]}
+                            style={[styles.btnAddNew,]}
                             onPress={() => navigation.push("AddNew")}>
-                            <Text style={[styles.btnText, {color: "#daa520", marginLeft: 40}]}><Ionicons name="md-flower-sharp" size={20} color="#ff4500" /> ADD NEW</Text>
+                            <Text style={styles.addNewText}><Ionicons name="md-flower-sharp" size={20} color="#ff4500" /> ADD NEW RECIPE </Text>
                         </Pressable>
             </View>
 
@@ -105,19 +105,19 @@ const styles = StyleSheet.create({
         width: "70%",
         alignItems: 'center',
         justifyContent: 'center',
-        marginTop: 50
+        marginTop: 30
     },
 
     text: {
         fontSize: 36,
-        color: "#daa520",
+        color: "green",
         fontStyle: "italic",
         fontWeight: "bold",
         marginLeft: 100,
         marginTop: 10,
-        textShadowColor: 'black',
+        textShadowColor: 'white',
         textShadowOffset: { width: 1, height: 1 },
-        textShadowRadius: 5,
+        textShadowRadius: 1,
     },
 
     btnText: {
@@ -126,11 +126,21 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         textShadowColor: 'black',
         textShadowOffset: { width: 1, height: 1 },
-        textShadowRadius: 5,
+        textShadowRadius: 1,
         marginLeft: 60,
         width: "80%"
     },
 
+    addNewText: {
+        color: "green",
+        fontSize: 24,
+        fontWeight: "bold",
+        textShadowColor: 'white',
+        textShadowOffset: { width: 1, height: 1 },
+        textShadowRadius: 1,
+        alignSelf: "center",
+        //width: "80%"
+    },
     separator: {
         marginVertical: 1,
     },
@@ -139,7 +149,17 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         paddingLeft: 100,
     },
-
+    
+    btnAddNew: {
+        paddingVertical: 10,
+        //paddingLeft: 100,
+        alignSelf: "center",
+        backgroundColor: "rgba(0, 1, 0, 0.32)",
+        width: 300,
+        borderRadius: 30,
+        borderColor: "black",
+        borderWidth: 1
+    },
 
 })
 

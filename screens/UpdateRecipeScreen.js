@@ -7,12 +7,10 @@ import {
     ScrollView,
     KeyboardAvoidingView, 
 } from "react-native";
-import { Entypo } from '@expo/vector-icons';
+
 import UpdateRecipeForm from "../components/UpdateRecipeForm";
 import axios from "axios";
 
-
-const Separator = () => <View style={styles.separator} />;
 
 //---------------------------------------------------------
 const UpdateRecipeScreen = ({ navigation, route }) => {
@@ -21,6 +19,7 @@ const UpdateRecipeScreen = ({ navigation, route }) => {
     console.log("Params in UpdateRecipeScreen");
     console.log(paramsRecipe);
 
+    //---------------------------------------------------------
     const handleUpdateFormSubmit = (form) => 
     {
 
@@ -28,35 +27,27 @@ const UpdateRecipeScreen = ({ navigation, route }) => {
         console.log(form);
         console.log(form._id);
 
+        //---------------------------------------------------------
         const updateRecipe = async (form) => {
 
-            console.log("!!!!! Inside updateRecipe !!!!!");
-            console.log(form);
-            console.log(form._id);
-
             let tagsArray = form.tags.split(" ");
-            let ingredientsArray = form.ingredients.split("/");
+            let ingredientsArray = form.ingredients.split("**");
 
             let updatedRecipe = {
-                type: form.type,
-                name: form.name,
-                description: form.description,
-                ingredients: ingredientsArray,
-                tags: tagsArray,
-                cookTime: form.cookTime,
-                calories: form.calories,
-                directions: form.directions,
-                rates: form.rates,
+                    type: form.type,
+                    name: form.name,
+                    description: form.description,
+                    ingredients: ingredientsArray,
+                    tags: tagsArray,
+                    cookTime: form.cookTime,
+                    calories: form.calories,
+                    directions: form.directions,
+                    rates: form.rates,
             } 
 
-            console.log("updatedRecipe")
-            console.log(updatedRecipe)
-
                 let url = 'https://recipe-app-server-production.up.railway.app/recipes/' + form._id;
-                console.log("URL");
-                console.log(url);
 
-                 const resp = await axios.patch(url, updatedRecipe)
+                const resp = await axios.patch(url, updatedRecipe)
                 .then( navigation.push("Recipes", {type: form.type}))
                 .catch((error) => console.log('Error: ', error));  
         };
@@ -82,7 +73,6 @@ const UpdateRecipeScreen = ({ navigation, route }) => {
             </View>
 
             <View style={styles.btnContainer}>
-                        <Separator/>
                         <Pressable
                             style={styles.btnPressMe}
                             onPress={() => navigation.push("Home")}>
@@ -111,7 +101,6 @@ const styles = StyleSheet.create({
         alignItems: 'flex-start',
         justifyContent: 'flex-start',
         backgroundColor: "rgba(89, 31, 5, 0.83)",
-        //opacity: 0.8
     },
 
     btnContainer: {
@@ -124,11 +113,8 @@ const styles = StyleSheet.create({
 
     miniContainer: {
         flex: 0.8,
-        //width: "50%",
         alignItems: 'flex-start',
         justifyContent: 'flex-start',
-        //backgroundColor: "green",
-        //paddingBottom: 80    
     },
 
     text: {
@@ -151,12 +137,7 @@ const styles = StyleSheet.create({
         textShadowOffset: { width: 1, height: 1 },
         textShadowRadius: 5,
         marginLeft: 130,
-        //backgroundColor: "white",
         width: "80%"
-    },
-
-    separator: {
-        marginVertical: 20,
     },
 
     btnPressMe: {

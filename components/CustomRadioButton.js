@@ -1,22 +1,21 @@
 import React from 'react';
-import { View, Text, Pressable, StyleSheet } from 'react-native';
+import { View, 
+        Text, 
+        Pressable, 
+        StyleSheet } from 'react-native';
 import { useState } from "react"
 
 export default function CustomRadioButton({ data, option, onSelect }) {
-    console.log("types in RadioButton");
-    console.log(data);
-    console.log(option);
 
     const [userOption, setUserOption] = useState(option);
     const [selected, setSelected] = useState(null);
 
     const selectHandler = (value) => {
-      console.log("Value in CustomradioButton");
-      console.log(value);
       onSelect(value);
       setUserOption(value);
     };
 
+  //=====================================================
   return (
     <View style={{display: "flex", flexDirection: "row", flexWrap: 'wrap'}}>
       {data.map((item) => {
@@ -31,6 +30,7 @@ export default function CustomRadioButton({ data, option, onSelect }) {
   );
 }
 
+//-------------- Styles-----------------------------
 const styles = StyleSheet.create({
   option: {
     fontSize: 16,

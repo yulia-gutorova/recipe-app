@@ -1,7 +1,6 @@
 import React from 'react';
 import { useState, useCallback} from "react"
 import { useFocusEffect, useIsFocused } from '@react-navigation/native';
-//import { useIsFocused } from '@react-navigation/native';
 
 import {
     View,
@@ -17,6 +16,8 @@ import { Entypo } from '@expo/vector-icons';
 import axios from "axios";
 
 import OneRecipe from "../components/OneRecipe";
+
+
 
 //---------------------------------------------------------
 const RecipesScreen = ({ navigation, route }) => {
@@ -49,52 +50,58 @@ const RecipesScreen = ({ navigation, route }) => {
     //-----------------------------------------------------
 
         let type = route.params.type;
-        console.log("Image");
-        console.log(route.params.image); 
-
         const [recipes, setRecipes] = useState([]);
-        //const [filteredRecipes, setFilteredRecipes] = useState([]);
-
         const isFocused = useIsFocused();
- 
+            console.log("route.params.path");
+            console.log(route.params.path);
+        let path =  route.params.path;   
+
         let typeRecipes= recipes.filter(item => item.type === type);
 
 
     //=====================================================
     return (  
         <View style={styles.container}>
-            <View style={styles.titleContainer}>
-                <Text style={styles.text}>{type}</Text>
-            </View>
-            
+ 
             <View style={styles.imageContainer}>
                 {type === "Vegetables" ? <Image source={require('../assets/vegetables-image.png')}style={styles.image}></Image>: null}
                 {type === "Soups" ? <Image source={require('../assets/soup-image.png')}style={styles.image}></Image>: null}
                 {type === "Salads" ? <Image source={require('../assets/salad-image.png')}style={styles.image}></Image>: null}
                 {type === "Main Dishes" ? <Image source={require('../assets/main-dishes-image.png')}style={styles.image}></Image>: null}
                 {type === "Desserts" ? <Image source={require('../assets/desserts-image.png')}style={styles.image}></Image>: null}
-                {type === "Holidays" ? <Image source={require('../assets/holidays-image.png')}style={styles.image}></Image>: null}
+                {type === "Holidays" ? <Image source={require('../assets/holidays-image.png')}style={styles.image}></Image>: null} 
             </View>
 
-            <View style={styles.flatlistContainer}>
 
-                {typeRecipes.length === 0 ? <Text style={styles.text}>You still don't have any  recipes here.</Text> : null}
+         <ImageBackground source={require('../assets/background-image.png')} style={styles.insideContainer}>
+
+            <View style={styles.titleContainer}>
+                <Text style={styles.text}>{type}</Text>
+            </View>
+
+        <View style={styles.flatlistContainer}>
+        {typeRecipes.length === 0 ? <Text style={styles.text}>You still don't have any  recipes here.</Text> : null}
                 <FlatList
                         style={styles.flatlist}
+                        key={type}
                         keyExtractor={item => item.id}
                         data={typeRecipes}
                         showsVerticalScrollIndicator
                         renderItem={({ item }) => 
-                        {
-                            return(
-                                <Pressable  onPress={() => navigation.navigate("RecipeDetail", {title: item.name, recipe:{item}})}>
-                                    <OneRecipe key={item.id} title={item.name} recipe={{item}}/>       
-                                </Pressable>        
+                        {   
+                            return(<>
+                                        <Pressable  onPress={() => navigation.navigate("RecipeDetail", {title: item.name, recipe:{item}})}>
+                                            <OneRecipe key={item._id} title={item.name} recipe={{item}}/>       
+                                        </Pressable> 
+                            </>
                             )
                         }
                         }
                 />
-            </View>
+            
+        </View>
+
+            </ImageBackground>
             
             <View style={styles.btnContainer}>
                 <Pressable
@@ -119,9 +126,9 @@ const styles = StyleSheet.create({
     },
 
     btnContainer: {
-        flex: 0.2,
+        flex: 0.1,
         width: "100%",
-        backgroundColor: "rgba(108, 56, 32, 0.83)",
+        backgroundColor: "rgba(0, 0, 0, 0.09)",
         alignItems: 'flex-end',
         justifyContent: 'center',
     },
@@ -129,19 +136,29 @@ const styles = StyleSheet.create({
     titleContainer: {
         flex: 0.2,
         width: "100%",
-        alignItems: 'flex-start',
-        justifyContent: 'flex-start',
-        paddingTop: 0,
-        backgroundColor: "rgba(89, 31, 5, 0.83)",
+        alignItems: 'center',
+        justifyContent: 'center',
+        //paddingTop: 10,
+        backgroundColor: "rgba(0, 0, 0, 0.09)",
     },
 
     flatlistContainer:{
-        flex: 0.8,
-        marginTop: 30,
-        backgroundColor: "rgba(0, 0, 0, 0.62)",
+        flex: 1,
+        paddingTop: 8,
+        //backgroundColor: "black",
+        width: "100%",
+        alignItems: 'center',
+        //justifyContent: 'center',
+    },
+
+    insideContainer:{
+        flex: 0.9,
+        paddingTop: 8,
+        //backgroundColor: "black",
         width: "100%",
         alignItems: 'center',
         justifyContent: 'center',
+        resizeMode: "cover"
     },
 
     imageContainer: {
@@ -150,7 +167,7 @@ const styles = StyleSheet.create({
     },
 
     flatlist: {
-        maxHeight: 500,
+        maxHeight: 300,
     },
 
     text: {
@@ -159,11 +176,12 @@ const styles = StyleSheet.create({
         fontStyle: "italic",
         fontWeight: "bold",
         textAlign: "right",
-        marginTop: 25,
-        marginLeft: 10,
+        //marginTop: 15,
+        marginTop: 10,
+        marginBottom: 10,
         textShadowColor: 'black',
         textShadowOffset: { width: 1, height: 1 },
-        textShadowRadius: 5,
+        textShadowRadius: 1,
     },
 
     btnText: {

@@ -12,7 +12,6 @@ import { Entypo } from '@expo/vector-icons';
 import AddNewRecipeForm from "../components/AddNewRecipeForm";
 import axios from "axios";
 
-const Separator = () => <View style={styles.separator} />;
 
 //---------------------------------------------------------
 const AddNewRecipeScreen = ({ navigation }) => {
@@ -37,7 +36,7 @@ const AddNewRecipeScreen = ({ navigation }) => {
                 rates: form.rates,
             } 
 
-            console.log(newRecipe)
+            console.log(newRecipe);
 
             const resp = await axios.post('https://recipe-app-server-production.up.railway.app/recipes', newRecipe)
             .then( navigation.push("Recipes", {type: form.type}))
@@ -56,11 +55,10 @@ const AddNewRecipeScreen = ({ navigation }) => {
         style={styles.container} >  */
 
         <KeyboardAvoidingView 
-        behavior={"height"}
-        keyboardVerticalOffset={0}
-        enabled={false} 
-        style={styles.container} >  
-
+                behavior={"height"}
+                keyboardVerticalOffset={0}
+                enabled={false} 
+                style={styles.container} >  
 
             <View style={styles.titleContainer}>
                 <Text style={styles.text}>Add a new recipe</Text>
@@ -71,14 +69,12 @@ const AddNewRecipeScreen = ({ navigation }) => {
             </View>
 
             <View style={styles.btnContainer}>
-                <Separator/>
                 <Pressable
                     style={styles.btnPressMe}
                     onPress={() => navigation.push("Home")}>
                     <Text style={styles.btnText}><Entypo name="arrow-bold-left" size={24} color="#daa520" /> Home</Text>
                 </Pressable>     
             </View>
-
 
         </KeyboardAvoidingView>
     )
@@ -103,12 +99,8 @@ const styles = StyleSheet.create({
 
     miniContainer: {
         flex: 0.8,
-        //width: "50%",
         alignItems: 'flex-start',
         justifyContent: 'flex-start',
-        //backgroundColor: "green",
-        //paddingBottom: 80
-        
     },
 
     titleContainer: {
@@ -117,7 +109,6 @@ const styles = StyleSheet.create({
         alignItems: 'flex-start',
         justifyContent: 'flex-start',
         backgroundColor: "rgba(89, 31, 5, 0.83)",
-        //opacity: 0.8
     },
 
     text: {
@@ -139,8 +130,6 @@ const styles = StyleSheet.create({
         textShadowColor: 'black',
         textShadowOffset: { width: 1, height: 1 },
         textShadowRadius: 5,
-        //marginLeft: 130,
-        //backgroundColor: "white",
         width: "80%"
     },
 
@@ -150,11 +139,9 @@ const styles = StyleSheet.create({
 
     btnPressMe: {
         paddingVertical: 10,
-        paddingLeft: 120,
+        paddingLeft: 100,
         paddingRight: 20,
-        //backgroundColor: "gray", 
     },
-
 })
 
 export default AddNewRecipeScreen

@@ -11,6 +11,7 @@ const Ingredients = ({ ing }) => {
     )
 }
 
+//-------------- Styles-----------------------------
 const styles = StyleSheet.create({
     oneIngredient: {
         marginVertical: 5,

@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react"
-import { LinearGradient } from "expo-linear-gradient";
+import { useState } from "react"
 import axios from "axios";
 import {
     View,
@@ -15,13 +14,14 @@ import {
 
 import Ingredients from "../components/Ingredients";
 import Tags from "../components/Tags";
+import Directions from "../components/Directions";
+import Rates from "../components/Rates";
 
 import { Entypo } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 
 
-const Separator = () => <View style={styles.separator} />;
-
+//---------------------------------------------------------
 const RecipeDetailScreen = ({ navigation, route }) => {
     const [ingredientsModalVisibility, setIngredientsModalVisibility] = useState(false);
     const [directionsModalVisibility, setDirectionsModalVisibility] = useState(false);
@@ -30,66 +30,12 @@ const RecipeDetailScreen = ({ navigation, route }) => {
     console.log(route.params);
     let recipe = route.params.recipe.item;
     let type = route.params.recipe.item.type;
-    let id = route.params.recipe.item._id;
-    //const completedBookings = response.data.filter((booking: Booking) => booking.status === false);
 
-    const Directions = ({ dir }) => {
-        return (
-            <View style={styles.oneIngredient}>
-                <Text style={styles.directionText}>{dir}</Text>
-            </View>
-        )
-    }
-
-    const Rates = ({ r }) => {
-
-        switch (r) {
-
-
-            case 1: return (
-
-                    <Text><AntDesign name="star" size={24} color="#daa520" /></Text>
-
-            )
-            case 2: return (
-
-                    <Text><AntDesign name="star" size={24} color="#daa520" />
-                        <AntDesign name="star" size={24} color="#daa520" />
-                    </Text>
-
-            )
-            case 3: return (
-
-                    <Text><AntDesign name="star" size={24} color="#daa520" />
-                        <AntDesign name="star" size={24} color="#daa520" />
-                        <AntDesign name="star" size={24} color="#daa520" />
-                    </Text>
-
-            )
-            case 4: return (
-
-                    <Text><AntDesign name="star" size={24} color="#daa520" />
-                        <AntDesign name="star" size={24} color="#daa520" />
-                        <AntDesign name="star" size={24} color="#daa520" />
-                        <AntDesign name="star" size={24} color="#daa520" />
-                    </Text>
-
-            )
-            case 5: 
-                let string = "";
-                for (let i = 0; i < 5; i++){
-                    string =+ <AntDesign name="star" size={24} color="#daa520" />
-                }
-                return (
-                    <Text>
-                        {string}
-                    </Text>)
-        }
-    }
-
+    //---------------------------------------------------------
     const handleDeleteRecipe = (id) => {
         console.log(id);
 
+        //---------------------------------------------------------
         const deleteRecipe = async () => {
             let url = 'https://recipe-app-server-production.up.railway.app/recipes/' + id;
             const resp = await axios.delete(url)
@@ -122,22 +68,21 @@ const RecipeDetailScreen = ({ navigation, route }) => {
                         <Tags t={route.params.recipe.item.tags}></Tags>
                     </View>
 
-                    <View style={[styles.oneIngredient, {flexDirection: "row"}]}>
+                    <View style={[styles.oneIngredient, { flexDirection: "row" }]}>
                         <Rates r={route.params.recipe.item.rates}></Rates>
                     </View>
 
                     <Pressable
                         style={styles.btnGetProperties}
                         onPress={() => { setIngredientsModalVisibility(!ingredientsModalVisibility) }}>
-                        <Text style={[styles.btnGetText, { color: "darkgray" }]}><AntDesign name="pluscircle" size={24} color="#daa520" /> Ingredients</Text
-                        >
 
+                        <Text style={[styles.btnGetText, { color: "darkgray" }]}><AntDesign name="pluscircle" size={24} color="#daa520" /> Ingredients</Text>
+                        
                         <Modal style={styles.modalContainer}
                             animationType={"fade"}
                             transparent={true}
                             visible={ingredientsModalVisibility}>
 
-                            {/*All views of Modal*/}
                             <View style={styles.modal}>
                                 <Text style={styles.titleText}>Ingredients:</Text>
 
@@ -145,12 +90,11 @@ const RecipeDetailScreen = ({ navigation, route }) => {
                                     <Ingredients ing={route.params.recipe.item.ingredients}></Ingredients>
                                 </ScrollView>
 
-                            <Pressable
-                            style={styles.btnModal}
-                            onPress={() => { setIngredientsModalVisibility(!ingredientsModalVisibility) }}>
-                            <Text style={[styles.btnModalText]}>Close</Text>
-                            </Pressable>
-
+                                <Pressable
+                                    style={styles.btnModal}
+                                    onPress={() => { setIngredientsModalVisibility(!ingredientsModalVisibility) }}>
+                                    <Text style={[styles.btnModalText]}>Close</Text>
+                                </Pressable>
                             </View>
                         </Modal>
 
@@ -159,6 +103,7 @@ const RecipeDetailScreen = ({ navigation, route }) => {
                     <Pressable
                         style={styles.btnGetProperties}
                         onPress={() => { setDirectionsModalVisibility(!directionsModalVisibility) }}>
+
                         <Text style={[styles.btnGetText, { color: "darkgray" }]}><AntDesign name="pluscircle" size={24} color="#daa520" /> Directions</Text>
 
                         <Modal style={styles.modalContainer}
@@ -181,9 +126,7 @@ const RecipeDetailScreen = ({ navigation, route }) => {
                             </View>
                         </Modal>
 
-
                     </Pressable>
-
 
                     <View style={styles.buttonsDetailContainer}>
                         <Pressable
@@ -196,9 +139,7 @@ const RecipeDetailScreen = ({ navigation, route }) => {
                             onPress={() => handleDeleteRecipe(route.params.recipe.item._id)}>
                             <Text style={[styles.btnText, { color: "#daa520" }]}>Delete</Text>
                         </Pressable>
-
                     </View>
-
 
                 </View>
 
@@ -211,8 +152,6 @@ const RecipeDetailScreen = ({ navigation, route }) => {
                     <Text style={styles.btnText}><Entypo name="arrow-bold-left" size={24} color="#daa520" /> Recipes</Text>
                 </Pressable>
             </View>
-
-
         </ImageBackground>
     )
 }
@@ -257,25 +196,17 @@ const styles = StyleSheet.create({
     //-------------------------------------------------------------
     detailContainer: {
         flex: 6,
-        //backgroundColor: "white",
         marginVertical: 20,
         borderRadius: 20,
         width: "90%",
-        //alignItems: 'center',
-        //opacity: 0.8
     },
 
     descriptionDetailContainer: {
         flex: 1,
-        //backgroundColor: "rgba(176, 165, 154, 0.83)",
-        //backgroundColor: "rgba(0, 0, 0, 0.5)",
-        //marginVertical: 20,
         borderRadius: 20,
         alignItems: 'center',
         justifyContent: 'space-around',
         width: "100%",
-        //alignItems: 'center',
-        //opacity: 0.8
     },
 
     buttonsDetailContainer: {
@@ -311,7 +242,6 @@ const styles = StyleSheet.create({
         color: "#daa520",
         fontStyle: "italic",
         fontWeight: "bold",
-        //backgroundColor: "white",
         textAlign: "left",
         marginTop: 25,
         marginLeft: 10,
@@ -325,12 +255,7 @@ const styles = StyleSheet.create({
         color: "white",
         fontWeight: "bold",
         fontStyle: "italic",
-        //marginLeft: 20,
-        ///textAlign: "left",
         margin: 8,
-        //textShadowOffset: { width: 1, height: 1 },
-        //textShadowRadius: 5,
-
     },
 
     btnText: {
@@ -341,7 +266,6 @@ const styles = StyleSheet.create({
         textShadowOffset: { width: 1, height: 1 },
         textShadowRadius: 5,
         marginLeft: 0,
-        //backgroundColor: "white",
     },
 
     separator: {
@@ -388,33 +312,29 @@ const styles = StyleSheet.create({
         backgroundColor: "rgba(0, 0, 0, 0.5)",
         borderBottomLeftRadius: 35,
         borderTopLeftRadius: 35,
-        //borderColor: "#daa520",
-        //borderWidth: 1, 
     },
 
     modal: {
         flex: 0.85,
         justifyContent: 'center',
         alignItems: 'center',
-        //backgroundColor: "rgba(176, 165, 154, 0.83)", 
         backgroundColor: "rgba(176, 165, 153, 1)",
         width: '95%',
         marginLeft: 10,
         marginTop: 75,
         borderRadius: 10,
         borderWidth: 1,
-        //borderColor: '#daa520',
         borderColor: "white",
         opasity: 0
     },
 
-    btnModal:{
+    btnModal: {
         paddingHorizontal: 20,
         paddingVertical: 10,
         backgroundColor: "rgba(0, 0, 0, 0.5)",
         margin: 20,
         borderRadius: 35
-    }, 
+    },
 
     btnModalText: {
         color: "#daa520",

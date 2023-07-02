@@ -1,89 +1,69 @@
-import {Text, View, StyleSheet, TextInput, Pressable, ScrollView, KeyboardAvoidingView} from "react-native"
 import { useState } from "react"
 import { RadioButton } from 'react-native-paper';
+import {
+    Text,
+    View,
+    StyleSheet,
+    TextInput,
+    Pressable,
+    ScrollView,
+    KeyboardAvoidingView
+} from "react-native"
 import CustomRadioButton from "./CustomRadioButton";
 
-const UpdateRecipeForm = ({onSubmit, recipe}) => {
-    //const [text, setText] = useState('Useless Text');
+const UpdateRecipeForm = ({ onSubmit, recipe }) => {
+
     let params = recipe;
-    console.log("Params in UpdateRecipeForm");
-    console.log(params.recipe);
 
     const [checkedCalories, setCheckedCalories] = useState(params.recipe.calories.toString());
-    const [option, setOption] = useState(null);
+    //const [option, setOption] = useState(null);
     const [checkedRate, setCheckedRate] = useState(params.recipe.rates.toString());
-
-
+    const types = ["Soups", "Salads", "Main dishes", "Desserts", 'Vegetables', "Holidays"];
 
     const [form, setForm] = useState({
         _id: params.recipe._id,
         type: params.recipe.type,
         name: params.recipe.name,
         description: params.recipe.description,
-        ingredients: params.recipe.ingredients.join("/"),
-        tags: params.recipe.tags.toString().replace(/,/g," "),
+        ingredients: params.recipe.ingredients.join(" ** "),
+        tags: params.recipe.tags.toString().replace(/,/g, " "),
         cookTime: params.recipe.cookTime.toString(),
         calories: params.recipe.calories,
         directions: params.recipe.directions,
         rates: params.recipe.rates.toString(),
     });
 
-    console.log("Form in UpdateRecipeForm");
-    console.log(form);
-
+    //---------------------------------------------------------
     const onChangeText = (name) => (text) => {
-        setForm({
-            ...form,
-            [name] : text
-        })
+        setForm({ ...form, [name]: text})
     }
 
+    //---------------------------------------------------------
     const onChangeRadioButton = (name, text) => {
         setCheckedCalories(text);
-        console.log("Form in onChangeradioButton:");
-        console.log(name);
-        console.log(text);
-        console.log(form);
-        setForm({
-            ...form,
-            [name]: text
-        })
+        setForm({...form, [name]: text})
     }
 
+    //---------------------------------------------------------
     const onChangeCustomRadioButton = (name, text) => {
-        console.log("Form in onChangeradioButton:");
-        console.log(name);
-        console.log(text);
-        console.log(form);
-        setForm({
-            ...form,
-            [name]: text
-        })
+        setForm({...form, [name]: text})
     }
 
+    //---------------------------------------------------------
     const onChangeRatesRadioButton = (name, text) => {
         setCheckedRate(text);
-        console.log("Form in onChangeradioButton:");
-        console.log(name);
-        console.log(text);
-        console.log(form);
-        setForm({
-            ...form,
-            [name]: text
-        })
+        setForm({...form, [name]: text})
     }
 
-    const types = ["Soups", "Salads", "Main dishes", "Desserts", 'Vegetables', "Holidays"];
-    
-    
+    //=====================================================
     return (
         <View>
 
-    <ScrollView style={styles.container}>
+            <ScrollView style={styles.container}>
 
-    <KeyboardAvoidingView behavior={"padding"}>
+                <KeyboardAvoidingView behavior={"padding"}>
 
-{/*             <TextInput
+                    {/*             <TextInput
                 label="Type"
                 text={form.type}
                 placeholder="Type"
@@ -92,63 +72,55 @@ const UpdateRecipeForm = ({onSubmit, recipe}) => {
                 value={form.type}
             /> */}
 
-            <View style={styles.miniContainer}>
-                    <Text style={[styles.paragraph, {fontWeight:"bold"}]}>Choose type: </Text>
-                    <CustomRadioButton data={types} option={params.recipe.type} onSelect={(value) => onChangeCustomRadioButton("type", value)} />
-            </View>
+                    <View style={styles.miniContainer}>
+                        <Text style={[styles.paragraph, { fontWeight: "bold" }]}>Choose type: </Text>
+                        <CustomRadioButton data={types} option={params.recipe.type} onSelect={(value) => onChangeCustomRadioButton("type", value)} />
+                    </View>
 
-            <Text style={{fontWeight:"bold", marginLeft: 10}}>Name: </Text>
-            <TextInput
-                label="Name"
-                text={form.name}
-                style={styles.input}
-                onChangeText={onChangeText("name")}
-                value={form.name}
-            /> 
-            <Text style={{fontWeight:"bold", marginLeft: 10}}>Description: </Text>
-            <TextInput
-                text={form.description}
-                multiline={true}
-                style={[styles.input, {minHeight: 100}]}
-                onChangeText={onChangeText("description")}
-                value={form.description}
-            />
+                    <Text style={{ fontWeight: "bold", marginLeft: 10 }}>Name: </Text>
+                    <TextInput
+                        label="Name"
+                        text={form.name}
+                        style={styles.input}
+                        onChangeText={onChangeText("name")}
+                        value={form.name}
+                    />
+                    <Text style={{ fontWeight: "bold", marginLeft: 10 }}>Description: </Text>
+                    <TextInput
+                        text={form.description}
+                        multiline={true}
+                        style={[styles.input, { minHeight: 100 }]}
+                        onChangeText={onChangeText("description")}
+                        value={form.description}
+                    />
 
-            <Text style={{fontWeight:"bold", marginLeft: 10}}>Ingredients (split with /): </Text>
-            <TextInput
-                text={form.ingredients}
-                multiline={true}
-                style={[styles.input, {minHeight: 100}]}
-                onChangeText={onChangeText("ingredients")}
-                value={form.ingredients}
-            /> 
+                    <Text style={{ fontWeight: "bold", marginLeft: 10 }}>Ingredients (split with /): </Text>
+                    <TextInput
+                        text={form.ingredients}
+                        multiline={true}
+                        style={[styles.input, { minHeight: 100 }]}
+                        onChangeText={onChangeText("ingredients")}
+                        value={form.ingredients}
+                    />
 
-            <Text style={{fontWeight:"bold", marginLeft: 10}}>Tags (split with space): </Text>
-            <TextInput
-                text={form.tags}
-                style={styles.input}
-                onChangeText={onChangeText("tags")}
-                value={form.tags}
-            />
+                    <Text style={{ fontWeight: "bold", marginLeft: 10 }}>Tags (split with space): </Text>
+                    <TextInput
+                        text={form.tags}
+                        style={styles.input}
+                        onChangeText={onChangeText("tags")}
+                        value={form.tags}
+                    />
 
-            <Text style={{fontWeight:"bold", marginLeft: 10}}>Cook Time: </Text>
-            <TextInput
-                keyboardType="phone-pad"
-                style={styles.input}
-                onChangeText={onChangeText("cookTime")}
-                value={form.cookTime}
-            /> 
-{/*             
-            <TextInput
-                label="Calories"
-                placeholder="Calories"
-                style={styles.input}
-                onChangeText={onChangeText("calories")}
-                value={form.calories}
-            /> */}
+                    <Text style={{ fontWeight: "bold", marginLeft: 10 }}>Cook Time: </Text>
+                    <TextInput
+                        keyboardType="phone-pad"
+                        style={styles.input}
+                        onChangeText={onChangeText("cookTime")}
+                        value={form.cookTime}
+                    />
 
-<View style={styles.miniContainer}>
-                        <Text style={{fontWeight:"bold"}}>Calories: </Text>
+                    <View style={styles.miniContainer}>
+                        <Text style={{ fontWeight: "bold" }}>Calories: </Text>
 
                         <View style={styles.radioButtonsContainer}>
 
@@ -185,21 +157,21 @@ const UpdateRecipeForm = ({onSubmit, recipe}) => {
                         </View>
                     </View>
 
-            <Text style={{fontWeight:"bold", marginLeft: 10}}>Directions: </Text>       
-            <TextInput
-                text={form.directions}
-                multiline={true}
-                style={[styles.input, {minHeight: 100}]}
-                onChangeText={onChangeText("directions")}
-                value={form.directions}
-            /> 
+                    <Text style={{ fontWeight: "bold", marginLeft: 10 }}>Directions: </Text>
+                    <TextInput
+                        text={form.directions}
+                        multiline={true}
+                        style={[styles.input, { minHeight: 100 }]}
+                        onChangeText={onChangeText("directions")}
+                        value={form.directions}
+                    />
                     <View style={styles.miniContainer}>
-                        <Text style={{fontWeight:"bold"}}>Rates: </Text>
+                        <Text style={{ fontWeight: "bold" }}>Rates: </Text>
 
                         <View style={styles.radioButtonsContainer}>
 
                             <View>
-                                <Text style={{paddingLeft: 10}}>1</Text>
+                                <Text style={{ paddingLeft: 10 }}>1</Text>
                                 <RadioButton
                                     color="red"
                                     value="1"
@@ -209,7 +181,7 @@ const UpdateRecipeForm = ({onSubmit, recipe}) => {
                             </View>
 
                             <View>
-                                <Text style={{paddingLeft: 10}}>2</Text>
+                                <Text style={{ paddingLeft: 10 }}>2</Text>
                                 <RadioButton
                                     color="red"
                                     value="2"
@@ -219,7 +191,7 @@ const UpdateRecipeForm = ({onSubmit, recipe}) => {
                             </View>
 
                             <View>
-                                <Text style={{paddingLeft: 10}}>3</Text>
+                                <Text style={{ paddingLeft: 10 }}>3</Text>
                                 <RadioButton
                                     color="red"
                                     value="3"
@@ -229,7 +201,7 @@ const UpdateRecipeForm = ({onSubmit, recipe}) => {
                             </View>
 
                             <View>
-                                <Text style={{paddingLeft: 10}}>4</Text>
+                                <Text style={{ paddingLeft: 10 }}>4</Text>
                                 <RadioButton
                                     color="red"
                                     value="4"
@@ -239,7 +211,7 @@ const UpdateRecipeForm = ({onSubmit, recipe}) => {
                             </View>
 
                             <View>
-                                <Text style={{paddingLeft: 10}}>5</Text>
+                                <Text style={{ paddingLeft: 10 }}>5</Text>
                                 <RadioButton
                                     color="red"
                                     value="5"
@@ -251,47 +223,33 @@ const UpdateRecipeForm = ({onSubmit, recipe}) => {
                         </View>
                     </View>
 
-             <TextInput
-                label="Rates"
-                text={form.rates}
-                placeholder="Rates"
-                keyboardType="phone-pad"
-                style={styles.input}
-                onChangeText={onChangeText("rates")}
-                value={form.rates}
-            /> 
-                <Pressable
-                style={styles.btnPressMe}
-                onPress={() => onSubmit(form)}>
-                <Text style={styles.btnText}>Submit</Text>
-        </Pressable>  
+                    <Pressable
+                        style={styles.btnPressMe}
+                        onPress={() => onSubmit(form)}>
+                        <Text style={styles.btnText}>Submit</Text>
+                    </Pressable>
 
-        </KeyboardAvoidingView>
-        </ScrollView>
-
-
-            
+                </KeyboardAvoidingView>
+            </ScrollView>
         </View>
-        
-    )   
+
+    )
 }
 
-const styles = StyleSheet.create ({
+//-------------- Styles-----------------------------
+const styles = StyleSheet.create({
     container: {
         flex: 0.8,
         padding: 20,
         backgroundColor: "rgba(176, 165, 153, 1)",
         width: 420,
-        //paddingBottom: 200
     },
 
     miniContainer: {
         flex: 0.8,
         padding: 20,
-        //backgroundColor: "rgba(71, 96, 102, 0.18)",
         width: 400,
         alignSelf: 'center',
-        //marginBottom: 20
     },
 
     radioButtonsContainer: {
@@ -312,7 +270,6 @@ const styles = StyleSheet.create ({
         paddingHorizontal: 20,
         paddingVertical: 10,
         alignItems: "center",
-        //backgroundColor: "rgba(0, 0, 0, 0.5)",
         marginBottom: 250,
     },
 

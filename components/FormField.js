@@ -16,6 +16,7 @@ const FormField = (props) => {
   )
 }
 
+//-------------- Styles-----------------------------
 const styles = StyleSheet.create({
   formFieldWrapper: {
   },
