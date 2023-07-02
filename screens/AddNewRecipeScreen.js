@@ -35,7 +35,8 @@ const AddNewRecipeScreen = ({ navigation }) => {
                 directions: form.directions,
                 rates: form.rates,
             } 
-
+            console.log("Inside handleFormSubmit");
+            console.log("newRecipe");
             console.log(newRecipe);
 
             const resp = await axios.post('https://recipe-app-server-production.up.railway.app/recipes', newRecipe)

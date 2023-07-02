@@ -49,7 +49,6 @@ const AddNewRecipeForm = ({ onSubmit }) => {
     }
     //---------------------------------------------------------
     const onChangeCustomRadioButton = (name, text) => {
-        console.log("Form in onChangeradioButton:");
         setForm({
             ...form,
             [name]: text

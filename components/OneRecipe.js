@@ -1,20 +1,33 @@
 import { View, StyleSheet, Text, Image } from "react-native"
 import React from "react"
+import Tags from "./Tags";
+import Rates from "./Rates";
 
 const OneRecipe = ({ recipe, key }) => {
   
   //=====================================================
   return (
-    <View key = {key} style={styles.item}>
-        <Text style={styles.title} key={recipe.item._id}>{recipe.item.name}</Text>
-        <Text style={styles.title} key={recipe.item._id}>{recipe.item.rates}</Text>
-        <Text style={styles.title} key={recipe.item._id}>{recipe.item.tags}</Text>
+    <View  style={styles.item}>
+      <View style={styles.titleContainer}>
+         <Text style={styles.titleText} >{recipe.item.name}</Text>
+      </View>
+        
+        <View style={[styles.oneIngredient, { flexDirection: "row" }]}>
+            <Rates r={recipe.item.rates}></Rates>
+        </View>
+        <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
+            <Tags t={recipe.item.tags}></Tags>
+        </View>
     </View>
   )
 };
 
 //-------------- Styles-----------------------------
 const styles = StyleSheet.create({
+  titleContainer: {
+
+  },
+
   item: {
     flex: 1,
     justifyContent: "center",
@@ -27,10 +40,11 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
 
-  title: {
+  titleText: {
     fontSize: 20,
     fontWeight: "bold",
     fontStyle: "italic",
+
   },
 });
 

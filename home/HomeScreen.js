@@ -29,9 +29,16 @@ const HomeScreen = ({ navigation }) => {
                         <Separator/>
 
                         <Pressable
-                            style={styles.btnPressMe}
+                        style={({pressed}) => [
+                            {
+                              color: pressed ? 'red' : "green",
+                            },
+                            styles.btnPressMe,
+                          ]}
+                        
+                            // style={styles.btnPressMe}
                             onPress={() => navigation.push("Recipes", {type: "Salads", path: "'../assets/vegetables-image.png'"})}>
-                            <Text style={styles.btnText}>Salads</Text>
+                            {({ hovered, focused, pressed }) => (<Text style={styles.btnText}>Salads</Text>)}
                         </Pressable>
 
                         <Separator/>
@@ -45,7 +52,9 @@ const HomeScreen = ({ navigation }) => {
                         <Separator/>
 
                         <Pressable
+
                             style={styles.btnPressMe}
+                            onMouseI
                             onPress={() => navigation.push("Recipes",  {type: "Main Dishes"})}>
                             <Text style={styles.btnText}>Main Dishes</Text>
                         </Pressable>
@@ -157,7 +166,7 @@ const styles = StyleSheet.create({
         backgroundColor: "rgba(0, 1, 0, 0.32)",
         width: 300,
         borderRadius: 30,
-        borderColor: "black",
+        borderColor: "gray",
         borderWidth: 1
     },
 
