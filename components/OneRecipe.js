@@ -7,7 +7,7 @@ const OneRecipe = ({ recipe, key }) => {
   
   //=====================================================
   return (
-    <View  style={styles.item}>
+    <View  key = {key} style={styles.item}>
       <View style={styles.titleContainer}>
          <Text style={styles.titleText} >{recipe.item.name}</Text>
       </View>

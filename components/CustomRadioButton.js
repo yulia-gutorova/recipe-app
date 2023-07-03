@@ -17,7 +17,7 @@ export default function CustomRadioButton({ data, option, onSelect }) {
 
   //=====================================================
   return (
-    <View style={{display: "flex", flexDirection: "row", flexWrap: 'wrap'}}>
+    <View style={styles.container}>
       {data.map((item) => {
         return (
           <Pressable  key={item} style={[styles.pressable, item === userOption ? styles.selected : styles.unselected]} 
@@ -32,16 +32,28 @@ export default function CustomRadioButton({ data, option, onSelect }) {
 
 //-------------- Styles-----------------------------
 const styles = StyleSheet.create({
+
+  container: {
+    display: "flex", 
+    width: 350,
+    flexDirection: "row", 
+    flexWrap: 'wrap', 
+    alignItems: "center", 
+    
+  },
+
   option: {
     fontSize: 16,
     color: 'white',
     textAlign: 'center',
   },
+
   unselected: {
     backgroundColor: 'brown',
     margin: 6,
     borderRadius: 10,
   },
+
   selected: {
     backgroundColor: 'red',
     borderRadius: 10,

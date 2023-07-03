@@ -16,7 +16,6 @@ const UpdateRecipeForm = ({ onSubmit, recipe }) => {
     let params = recipe;
 
     const [checkedCalories, setCheckedCalories] = useState(params.recipe.calories.toString());
-    //const [option, setOption] = useState(null);
     const [checkedRate, setCheckedRate] = useState(params.recipe.rates.toString());
     const types = ["Soups", "Salads", "Main dishes", "Desserts", 'Vegetables', "Holidays"];
 
@@ -25,7 +24,7 @@ const UpdateRecipeForm = ({ onSubmit, recipe }) => {
         type: params.recipe.type,
         name: params.recipe.name,
         description: params.recipe.description,
-        ingredients: params.recipe.ingredients.join(" ** "),
+        ingredients: params.recipe.ingredients.join(" * "),
         tags: params.recipe.tags.toString().replace(/,/g, " "),
         cookTime: params.recipe.cookTime.toString(),
         calories: params.recipe.calories,
@@ -63,15 +62,6 @@ const UpdateRecipeForm = ({ onSubmit, recipe }) => {
 
                 <KeyboardAvoidingView behavior={"padding"}>
 
-                    {/*             <TextInput
-                label="Type"
-                text={form.type}
-                placeholder="Type"
-                style={styles.input}
-                onChangeText={onChangeText("type")}
-                value={form.type}
-            /> */}
-
                     <View style={styles.miniContainer}>
                         <Text style={[styles.paragraph, { fontWeight: "bold" }]}>Choose type: </Text>
                         <CustomRadioButton data={types} option={params.recipe.type} onSelect={(value) => onChangeCustomRadioButton("type", value)} />
@@ -80,6 +70,7 @@ const UpdateRecipeForm = ({ onSubmit, recipe }) => {
                     <Text style={{ fontWeight: "bold", marginLeft: 10 }}>Name: </Text>
                     <TextInput
                         label="Name"
+                        selectionColor={'black'}
                         text={form.name}
                         style={styles.input}
                         onChangeText={onChangeText("name")}
@@ -88,17 +79,19 @@ const UpdateRecipeForm = ({ onSubmit, recipe }) => {
                     <Text style={{ fontWeight: "bold", marginLeft: 10 }}>Description: </Text>
                     <TextInput
                         text={form.description}
+                        selectionColor={'black'}
                         multiline={true}
-                        style={[styles.input, { minHeight: 100 }]}
+                        style={[styles.input, { minHeight: 100, textAlignVertical: "top" }]}
                         onChangeText={onChangeText("description")}
                         value={form.description}
                     />
 
-                    <Text style={{ fontWeight: "bold", marginLeft: 10 }}>Ingredients (split with /): </Text>
+                    <Text style={{ fontWeight: "bold", marginLeft: 10 }}>Ingredients (split with **): </Text>
                     <TextInput
                         text={form.ingredients}
+                        selectionColor={'black'}
                         multiline={true}
-                        style={[styles.input, { minHeight: 100 }]}
+                        style={[styles.input, { minHeight: 100, textAlignVertical: "top" }]}
                         onChangeText={onChangeText("ingredients")}
                         value={form.ingredients}
                     />
@@ -106,6 +99,7 @@ const UpdateRecipeForm = ({ onSubmit, recipe }) => {
                     <Text style={{ fontWeight: "bold", marginLeft: 10 }}>Tags (split with space): </Text>
                     <TextInput
                         text={form.tags}
+                        selectionColor={'black'}
                         style={styles.input}
                         onChangeText={onChangeText("tags")}
                         value={form.tags}
@@ -114,6 +108,7 @@ const UpdateRecipeForm = ({ onSubmit, recipe }) => {
                     <Text style={{ fontWeight: "bold", marginLeft: 10 }}>Cook Time: </Text>
                     <TextInput
                         keyboardType="phone-pad"
+                        selectionColor={'black'}
                         style={styles.input}
                         onChangeText={onChangeText("cookTime")}
                         value={form.cookTime}
@@ -160,11 +155,13 @@ const UpdateRecipeForm = ({ onSubmit, recipe }) => {
                     <Text style={{ fontWeight: "bold", marginLeft: 10 }}>Directions: </Text>
                     <TextInput
                         text={form.directions}
+                        selectionColor={'black'}
                         multiline={true}
-                        style={[styles.input, { minHeight: 100 }]}
+                        style={[styles.input, { minHeight: 100, textAlignVertical: "top" }]}
                         onChangeText={onChangeText("directions")}
                         value={form.directions}
                     />
+
                     <View style={styles.miniContainer}>
                         <Text style={{ fontWeight: "bold" }}>Rates: </Text>
 
@@ -260,8 +257,9 @@ const styles = StyleSheet.create({
     input: {
         height: 40,
         margin: 12,
+        borderColor: "rgba(108, 56, 32, 0.83)",
         borderWidth: 1,
-        padding: 10,
+        //padding: 10,
     },
 
     btnPressMe: {

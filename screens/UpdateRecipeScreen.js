@@ -10,6 +10,7 @@ import {
 
 import UpdateRecipeForm from "../components/UpdateRecipeForm";
 import { Entypo } from '@expo/vector-icons';
+import {API_URL} from "@env"
 import axios from "axios";
 
 
@@ -17,22 +18,29 @@ import axios from "axios";
 const UpdateRecipeScreen = ({ navigation, route }) => {
 
     let paramsRecipe= route.params.recipe; 
-    console.log("Params in UpdateRecipeScreen");
-    console.log(paramsRecipe);
+    //console.log("Params in UpdateRecipeScreen");
+    //console.log(paramsRecipe);
 
     //---------------------------------------------------------
     const handleUpdateFormSubmit = (form) => 
     {
 
-        console.log("In handleUpdateFormSubmit");
-        console.log(form);
-        console.log(form._id);
+        //console.log("In handleUpdateFormSubmit");
+        //console.log(form);
+        //console.log(form._id);
 
         //---------------------------------------------------------
         const updateRecipe = async (form) => {
 
             let tagsArray = form.tags.split(" ");
-            let ingredientsArray = form.ingredients.split("**");
+            let ingredientsArray = form.ingredients.split("*");
+            console.log("In updateRecipe");
+            console.log(form.tags);
+            console.log(tagsArray);
+            console.log(form.ingredients);
+            console.log(ingredientsArray);
+
+
 
             let updatedRecipe = {
                     type: form.type,
@@ -46,7 +54,7 @@ const UpdateRecipeScreen = ({ navigation, route }) => {
                     rates: form.rates,
             } 
 
-                let url = 'https://recipe-app-server-production.up.railway.app/recipes/' + form._id;
+                let url = API_URL + '/' + form._id;
 
                 const resp = await axios.patch(url, updatedRecipe)
                 .then( navigation.push("Recipes", {type: form.type}))

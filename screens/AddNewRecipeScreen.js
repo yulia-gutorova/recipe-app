@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import { Entypo } from '@expo/vector-icons';
 import AddNewRecipeForm from "../components/AddNewRecipeForm";
+import {API_URL} from "@env"
 import axios from "axios";
 
 
@@ -22,7 +23,7 @@ const AddNewRecipeScreen = ({ navigation }) => {
         const createRecipe = async (form) => {
 
             let tagsArray = form.tags.split(" ");
-            let ingredientsArray = form.ingredients.split("/");
+            let ingredientsArray = form.ingredients.split("*");
 
             let newRecipe = {
                 type: form.type,
@@ -35,11 +36,11 @@ const AddNewRecipeScreen = ({ navigation }) => {
                 directions: form.directions,
                 rates: form.rates,
             } 
-            console.log("Inside handleFormSubmit");
-            console.log("newRecipe");
-            console.log(newRecipe);
+            //console.log("Inside handleFormSubmit");
+            //console.log("newRecipe");
+            //console.log(newRecipe);
 
-            const resp = await axios.post('https://recipe-app-server-production.up.railway.app/recipes', newRecipe)
+            const resp = await axios.post(API_URL, newRecipe)
             .then( navigation.push("Recipes", {type: form.type}))
             .catch((error) => console.log('Error: ', error));
         };

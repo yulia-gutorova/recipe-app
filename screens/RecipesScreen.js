@@ -14,6 +14,7 @@ import {
 
 import { Entypo } from '@expo/vector-icons';
 import axios from "axios";
+import {API_URL} from "@env"
 
 import OneRecipe from "../components/OneRecipe";
 
@@ -33,7 +34,7 @@ const RecipesScreen = ({ navigation, route }) => {
             console.log(type);
             const getAllRecipes = async (type) => {
                 console.log("In get all recipes function");
-                const resp = await axios.get('https://recipe-app-server-production.up.railway.app/recipes')
+                const resp = await axios.get(API_URL)
                     .then(resp => {
                         console.log("Responce");
                         console.log(resp.data);
@@ -55,7 +56,7 @@ const RecipesScreen = ({ navigation, route }) => {
     { 
         const getAllRecipes = async (type) => {
             console.log("In get all recipes function");
-            const resp = await axios.get('https://recipe-app-server-production.up.railway.app/recipes')
+            const resp = await axios.get(API_URL)
                 .then(resp => {
                     console.log("Responce");
                     console.log(resp.data);
@@ -79,34 +80,24 @@ const RecipesScreen = ({ navigation, route }) => {
     let url = '';
 
     switch (type) {
-        case "Salads" : url = require('../assets/salad-background.png');
-                        break;
-        case "Soups" : url = require('../assets/soup-background.png');
-                        break;
-        case "Desserts" : url = require('../assets/dessert-background.png');
-                        break;
+        case "Salads"     : url = require('../assets/salad-background.png');
+                            break;
+        case "Soups"      : url = require('../assets/soup-background.png');
+                            break;
+        case "Desserts"   : url = require('../assets/desserts-background.png');
+                            break;
         case "Vegetables" : url = require('../assets/vegetables-background.png');
-                        break;
-        case "Main Dishes" : url = require('../assets/main-dishes-background.png');
-                        break;
-        case "Holidays" : url = require('../assets/holidays-background.png');
-                        break;
-        default : url = require('../assets/holidays-background.png');
+                            break;
+        case "Main Dishes": url = require('../assets/main-dishes-background.png');
+                            break;
+        case "Holidays"   : url = require('../assets/holidays-background.png');
+                            break;
+        default           : url = require('../assets/holidays-background.png');
     } 
 
     //=====================================================
     return (
         <ImageBackground style={styles.container} source={url}>
-
-            {/*             <View style={styles.imageContainer}>
-                {type === "Vegetables" ? <Image source={require('../assets/vegetables-image.png')}style={styles.image}></Image>: null}
-                {type === "Soups" ? <Image source={require('../assets/soup-image.png')}style={styles.image}></Image>: null}
-                {type === "Salads" ? <Image source={require('../assets/salad-image.png')}style={styles.image}></Image>: null}
-                {type === "Main Dishes" ? <Image source={require('../assets/main-dishes-image.png')}style={styles.image}></Image>: null}
-                {type === "Desserts" ? <Image source={require('../assets/desserts-image.png')}style={styles.image}></Image>: null}
-                {type === "Holidays" ? <Image source={require('../assets/holidays-image.png')}style={styles.image}></Image>: null} 
-            </View> */}
-
 
             <View style={styles.insideContainer}>
 

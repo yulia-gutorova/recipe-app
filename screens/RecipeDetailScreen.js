@@ -9,7 +9,8 @@ import {
     ImageBackground,
     Modal,
     Button,
-    ScrollView
+    ScrollView, 
+    Alert
 } from "react-native";
 
 import Ingredients from "../components/Ingredients";
@@ -19,6 +20,7 @@ import Rates from "../components/Rates";
 
 import { Entypo } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
+import {API_URL} from "@env"
 
 
 //---------------------------------------------------------
@@ -37,14 +39,24 @@ const RecipeDetailScreen = ({ navigation, route }) => {
 
         //---------------------------------------------------------
         const deleteRecipe = async () => {
-            let url = 'https://recipe-app-server-production.up.railway.app/recipes/' + id;
+            let url = API_URL + '/' + id;
             const resp = await axios.delete(url)
                 .then()
                 .catch((error) => console.log('Error: ', error));
         };
 
-        deleteRecipe(id);
-        navigation.navigate("Recipes", { type: type });
+        Alert.alert
+        (
+            'Do you really want to delete this recipe?',
+            '',
+            [
+                {text: 'Yes', onPress: () => { deleteRecipe(id);
+                                               navigation.navigate("Recipes", { type: type })}},
+                {text: 'No', onPress: () => console.log('No Pressed'), style: 'cancel'},
+            ],
+            {cancelable: false},
+            //clicking out side of alert will not cancel
+          );
     }
 
 
@@ -171,14 +183,9 @@ const styles = StyleSheet.create({
     btnContainer: {
         flex: 1,
         width: "100%",
-        //alignItems: 'center',
-        //justifyContent: 'center',
-        //backgroundColor: "rgba(71, 53, 29, 0.83)",
-        //backgroundColor: "rgba(74, 38, 0, 0.83)",
         backgroundColor: "rgba(0, 0, 0, 0.5)",
         alignItems: 'flex-end',
         justifyContent: 'center',
-        //backgroundColor: "gray",
     },
 
     //-------------------------------------------------------------
@@ -186,11 +193,7 @@ const styles = StyleSheet.create({
         flex: 1,
         width: "100%",
         paddingTop: 0,
-        //backgroundColor: "rgba(132, 160, 140, 0.53)",
         backgroundColor: "rgba(0, 0, 0, 0.5)",
-        //borderBottomRightRadius: 500,
-        //borderBottomLeftRadius: 200,
-        //opacity: 0.8
     },
 
     //-------------------------------------------------------------
