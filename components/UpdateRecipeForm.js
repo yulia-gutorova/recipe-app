@@ -7,13 +7,15 @@ import {
     TextInput,
     Pressable,
     ScrollView,
-    KeyboardAvoidingView
+    KeyboardAvoidingView,
+    Keyboard
 } from "react-native"
 import CustomRadioButton from "./CustomRadioButton";
 
 const UpdateRecipeForm = ({ onSubmit, recipe }) => {
 
     let params = recipe;
+
 
     const [checkedCalories, setCheckedCalories] = useState(params.recipe.calories.toString());
     const [checkedRate, setCheckedRate] = useState(params.recipe.rates.toString());
@@ -34,24 +36,26 @@ const UpdateRecipeForm = ({ onSubmit, recipe }) => {
 
     //---------------------------------------------------------
     const onChangeText = (name) => (text) => {
-        setForm({ ...form, [name]: text})
+        setForm({ ...form, [name]: text })
     }
 
     //---------------------------------------------------------
     const onChangeRadioButton = (name, text) => {
         setCheckedCalories(text);
-        setForm({...form, [name]: text})
+        setForm({ ...form, [name]: text });
+        
     }
 
     //---------------------------------------------------------
     const onChangeCustomRadioButton = (name, text) => {
-        setForm({...form, [name]: text})
+        setForm({ ...form, [name]: text });   
     }
 
     //---------------------------------------------------------
     const onChangeRatesRadioButton = (name, text) => {
         setCheckedRate(text);
-        setForm({...form, [name]: text})
+        setForm({ ...form, [name]: text });
+        
     }
 
     //=====================================================
@@ -61,59 +65,67 @@ const UpdateRecipeForm = ({ onSubmit, recipe }) => {
             <ScrollView style={styles.container}>
 
                 <KeyboardAvoidingView behavior={"padding"}>
-
+                    {/* Type custom radio buttons */}
                     <View style={styles.miniContainer}>
                         <Text style={[styles.paragraph, { fontWeight: "bold" }]}>Choose type: </Text>
                         <CustomRadioButton data={types} option={params.recipe.type} onSelect={(value) => onChangeCustomRadioButton("type", value)} />
                     </View>
 
+                    {/* Name text field */}
                     <Text style={{ fontWeight: "bold", marginLeft: 10 }}>Name: </Text>
                     <TextInput
                         label="Name"
                         selectionColor={'black'}
                         text={form.name}
-                        style={styles.input}
+                        style={[styles.input, styles.inputText]}
                         onChangeText={onChangeText("name")}
                         value={form.name}
                     />
+
+                    {/* Description text field */}
                     <Text style={{ fontWeight: "bold", marginLeft: 10 }}>Description: </Text>
                     <TextInput
                         text={form.description}
                         selectionColor={'black'}
                         multiline={true}
-                        style={[styles.input, { minHeight: 100, textAlignVertical: "top" }]}
+                        style={[styles.input, styles.inputText, { minHeight: 100}]}
                         onChangeText={onChangeText("description")}
                         value={form.description}
                     />
 
+                    {/* Ingredients text field */}
                     <Text style={{ fontWeight: "bold", marginLeft: 10 }}>Ingredients (split with **): </Text>
                     <TextInput
                         text={form.ingredients}
                         selectionColor={'black'}
                         multiline={true}
-                        style={[styles.input, { minHeight: 100, textAlignVertical: "top" }]}
+                        style={[styles.input, styles.inputText, {minHeight: 100}]}
                         onChangeText={onChangeText("ingredients")}
                         value={form.ingredients}
                     />
 
+                    {/* Tags text field */}
                     <Text style={{ fontWeight: "bold", marginLeft: 10 }}>Tags (split with space): </Text>
                     <TextInput
                         text={form.tags}
                         selectionColor={'black'}
-                        style={styles.input}
+                        style={[styles.input, styles.inputText, {textAlignVertical: "center"}]}
                         onChangeText={onChangeText("tags")}
                         value={form.tags}
                     />
+
+                    {/* Cook time text field */}
 
                     <Text style={{ fontWeight: "bold", marginLeft: 10 }}>Cook Time: </Text>
                     <TextInput
                         keyboardType="phone-pad"
                         selectionColor={'black'}
-                        style={styles.input}
+                        style={[styles.input, styles.inputText, {textAlignVertical: "center"}]}
                         onChangeText={onChangeText("cookTime")}
                         value={form.cookTime}
                     />
 
+                    {/* Calories radio buttons */}
                     <View style={styles.miniContainer}>
                         <Text style={{ fontWeight: "bold" }}>Calories: </Text>
 
@@ -152,16 +164,18 @@ const UpdateRecipeForm = ({ onSubmit, recipe }) => {
                         </View>
                     </View>
 
+                    {/* Directions text field */}
                     <Text style={{ fontWeight: "bold", marginLeft: 10 }}>Directions: </Text>
                     <TextInput
                         text={form.directions}
                         selectionColor={'black'}
                         multiline={true}
-                        style={[styles.input, { minHeight: 100, textAlignVertical: "top" }]}
+                        style={[styles.input, styles.inputText,{ minHeight: 200}]}
                         onChangeText={onChangeText("directions")}
                         value={form.directions}
                     />
 
+                    {/* Rates radio buttons*/}
                     <View style={styles.miniContainer}>
                         <Text style={{ fontWeight: "bold" }}>Rates: </Text>
 
@@ -177,6 +191,7 @@ const UpdateRecipeForm = ({ onSubmit, recipe }) => {
                                 />
                             </View>
 
+                            
                             <View>
                                 <Text style={{ paddingLeft: 10 }}>2</Text>
                                 <RadioButton
@@ -219,15 +234,22 @@ const UpdateRecipeForm = ({ onSubmit, recipe }) => {
 
                         </View>
                     </View>
+{/* 
+                    <TextInput
+                        style={[styles.input, styles.inputText]}
+                        onChangeText={onChangeText("name")}
+                    /> */}
 
-                    <Pressable
+                    {/* Submit button */}
+                     <Pressable
                         style={styles.btnPressMe}
                         onPress={() => onSubmit(form)}>
                         <Text style={styles.btnText}>Submit</Text>
-                    </Pressable>
+                    </Pressable>  
 
                 </KeyboardAvoidingView>
             </ScrollView>
+
         </View>
 
     )
@@ -236,14 +258,14 @@ const UpdateRecipeForm = ({ onSubmit, recipe }) => {
 //-------------- Styles-----------------------------
 const styles = StyleSheet.create({
     container: {
-        flex: 0.8,
+        flex: 1,
         padding: 20,
         backgroundColor: "rgba(176, 165, 153, 1)",
         width: 420,
     },
 
     miniContainer: {
-        flex: 0.8,
+        flex: 1,
         padding: 20,
         width: 400,
         alignSelf: 'center',
@@ -262,13 +284,19 @@ const styles = StyleSheet.create({
         //padding: 10,
     },
 
+    inputText: { 
+        textAlignVertical: "top", 
+        paddingLeft: 5, 
+        paddingRight: 5
+    },
+
     btnPressMe: {
         alignSelf: 'center',
         width: 200,
         paddingHorizontal: 20,
         paddingVertical: 10,
         alignItems: "center",
-        marginBottom: 250,
+        marginBottom: 350,
     },
 
     btnText: {
@@ -280,6 +308,9 @@ const styles = StyleSheet.create({
         textShadowRadius: 5,
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    newSubmit:{
+        backgroundColor: "rgba(176, 165, 153, 1)"
     }
 })
 

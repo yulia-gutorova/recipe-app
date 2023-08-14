@@ -1,5 +1,5 @@
 import React from 'react';
-import { Ionicons } from '@expo/vector-icons'; 
+import { Ionicons } from '@expo/vector-icons';
 
 import {
     View,
@@ -17,77 +17,77 @@ const HomeScreen = ({ navigation }) => {
     //=====================================================
     return (
         <ImageBackground
-                source={require('../assets/home-image.png')}
-                style={styles.container} >
+            source={require('../assets/home-image.png')}
+            style={styles.container} >
 
-            <View   style={[styles.miniContainer]}>
+            <View style={[styles.miniContainer]}>
                 <Text style={styles.text}>My</Text>
                 <Text style={styles.text}>Cookbook</Text>
             </View>
 
             <View style={styles.btnContainer}>
-                        <Separator/>
+                <Separator />
 
-                        <Pressable
-                        style={({pressed}) => [
-                            {
-                              color: pressed ? 'red' : "green",
-                            },
-                            styles.btnPressMe,
-                          ]}
-                        
-                            // style={styles.btnPressMe}
-                            onPress={() => navigation.push("Recipes", {type: "Salads", path: "'../assets/vegetables-image.png'"})}>
-                            {({ hovered, focused, pressed }) => (<Text style={styles.btnText}>Salads</Text>)}
-                        </Pressable>
+                <Pressable
+                    style={({ pressed }) => [
+                        {
+                            color: pressed ? 'red' : "green",
+                        },
+                        styles.btnPressMe,
+                    ]}
 
-                        <Separator/>
+                    // style={styles.btnPressMe}
+                    onPress={() => navigation.push("Recipes", { type: "Salads", path: "'../assets/vegetables-image.png'" })}>
+                    {({ hovered, focused, pressed }) => (<Text style={styles.btnText}>Salads</Text>)}
+                </Pressable>
 
-                        <Pressable
-                            style={styles.btnPressMe}
-                            onPress={() => navigation.push("Recipes", {type: "Soups"})}>
-                            <Text style={styles.btnText}>Soups</Text>
-                        </Pressable>
+                <Separator />
 
-                        <Separator/>
+                <Pressable
+                    style={styles.btnPressMe}
+                    onPress={() => navigation.push("Recipes", { type: "Soups" })}>
+                    <Text style={styles.btnText}>Soups</Text>
+                </Pressable>
 
-                        <Pressable
+                <Separator />
 
-                            style={styles.btnPressMe}
-                            onMouseI
-                            onPress={() => navigation.push("Recipes",  {type: "Main Dishes"})}>
-                            <Text style={styles.btnText}>Main Dishes</Text>
-                        </Pressable>
+                <Pressable
 
-                        <Pressable
-                            style={styles.btnPressMe}
-                            onPress={() => navigation.push("Recipes" , {type: "Desserts"})}>
-                            <Text style={styles.btnText}>Desserts</Text>
-                        </Pressable>
+                    style={styles.btnPressMe}
+                    onMouseI
+                    onPress={() => navigation.push("Recipes", { type: "Main Dishes" })}>
+                    <Text style={styles.btnText}>Main Dishes</Text>
+                </Pressable>
 
-                        <Separator/>
+                <Pressable
+                    style={styles.btnPressMe}
+                    onPress={() => navigation.push("Recipes", { type: "Desserts" })}>
+                    <Text style={styles.btnText}>Desserts</Text>
+                </Pressable>
 
-                        <Pressable
-                            style={styles.btnPressMe}
-                            onPress={() => navigation.push("Recipes", {type: "Vegetables"} )}>
-                            <Text style={styles.btnText}>Vegetables</Text>
-                        </Pressable>
+                <Separator />
 
-                        <Separator/>
+                <Pressable
+                    style={styles.btnPressMe}
+                    onPress={() => navigation.push("Recipes", { type: "Vegetables" })}>
+                    <Text style={styles.btnText}>Vegetables</Text>
+                </Pressable>
 
-                        <Pressable
-                            style={styles.btnPressMe}
-                            onPress={() => navigation.push("Recipes", {type: "Holidays"})}>
-                            <Text style={styles.btnText}>Holidays</Text>
-                        </Pressable>
+                <Separator />
 
-                        <Separator/>
-                        
-                        <Pressable
-                            style={[styles.btnAddNew,]}
-                            onPress={() => navigation.push("AddNew")}>
-                            <Text style={styles.addNewText}><Ionicons name="md-flower-sharp" size={20} color="#ff4500" /> ADD NEW RECIPE </Text>
-                        </Pressable>
+                <Pressable
+                    style={styles.btnPressMe}
+                    onPress={() => navigation.push("Recipes", { type: "Holidays" })}>
+                    <Text style={styles.btnText}>Holidays</Text>
+                </Pressable>
+
+                <Separator />
+
+                <Pressable
+                    style={[styles.btnAddNew,]}
+                    onPress={() => navigation.push("AddNew")}>
+                    <Text style={styles.addNewText}><Ionicons name="md-flower-sharp" size={20} color="#ff4500" /> ADD NEW RECIPE </Text>
+                </Pressable>
             </View>
 
         </ImageBackground>
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
     btnContainer: {
         flex: 1,
         width: "100%",
-        opacity: 0.8   
+        opacity: 0.8
     },
 
     miniContainer: {
@@ -148,8 +148,8 @@ const styles = StyleSheet.create({
         textShadowOffset: { width: 1, height: 1 },
         textShadowRadius: 1,
         alignSelf: "center",
-        //width: "80%"
     },
+
     separator: {
         marginVertical: 1,
     },
@@ -158,10 +158,9 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         paddingLeft: 100,
     },
-    
+
     btnAddNew: {
         paddingVertical: 10,
-        //paddingLeft: 100,
         alignSelf: "center",
         backgroundColor: "rgba(0, 1, 0, 0.32)",
         width: 300,

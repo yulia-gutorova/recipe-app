@@ -28,14 +28,14 @@ const RecipeDetailScreen = ({ navigation, route }) => {
     const [ingredientsModalVisibility, setIngredientsModalVisibility] = useState(false);
     const [directionsModalVisibility, setDirectionsModalVisibility] = useState(false);
 
-    console.log("Route params");
-    console.log(route.params);
+    //console.log("Route params");
+    //console.log(route.params);
     let recipe = route.params.recipe.item;
     let type = route.params.recipe.item.type;
 
     //---------------------------------------------------------
     const handleDeleteRecipe = (id) => {
-        console.log(id);
+        //console.log(id);
 
         //---------------------------------------------------------
         const deleteRecipe = async () => {

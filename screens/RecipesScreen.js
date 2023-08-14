@@ -14,7 +14,7 @@ import {
 
 import { Entypo } from '@expo/vector-icons';
 import axios from "axios";
-import {API_URL} from "@env"
+import { API_URL } from "@env"
 
 import OneRecipe from "../components/OneRecipe";
 
@@ -29,15 +29,15 @@ const RecipesScreen = ({ navigation, route }) => {
     //-----------------------------------------------------
     useFocusEffect(
         useCallback((type) => {
-            console.log("inside useFocusEffect");
-            console.log("Type outside");
-            console.log(type);
+            //console.log("inside useFocusEffect");
+            //console.log("Type outside");
+            //console.log(type);
             const getAllRecipes = async (type) => {
-                console.log("In get all recipes function");
+                //console.log("In get all recipes function");
                 const resp = await axios.get(API_URL)
                     .then(resp => {
-                        console.log("Responce");
-                        console.log(resp.data);
+                        //console.log("Responce");
+                        //console.log(resp.data);
                         setRecipes(resp.data);
                     })
 
@@ -52,14 +52,13 @@ const RecipesScreen = ({ navigation, route }) => {
     //-----------------------------------------------------
     //useEffect to get all recipes when loading CraftScreen
     //-----------------------------------------------------
-    useEffect(() => 
-    { 
+    useEffect(() => {
         const getAllRecipes = async (type) => {
-            console.log("In get all recipes function");
+            //console.log("In get all recipes function");
             const resp = await axios.get(API_URL)
                 .then(resp => {
-                    console.log("Responce");
-                    console.log(resp.data);
+                    //console.log("Responce");
+                    //console.log(resp.data);
                     setRecipes(resp.data);
                 })
 
@@ -80,20 +79,20 @@ const RecipesScreen = ({ navigation, route }) => {
     let url = '';
 
     switch (type) {
-        case "Salads"     : url = require('../assets/salad-background.png');
-                            break;
-        case "Soups"      : url = require('../assets/soup-background.png');
-                            break;
-        case "Desserts"   : url = require('../assets/desserts-background.png');
-                            break;
-        case "Vegetables" : url = require('../assets/vegetables-background.png');
-                            break;
+        case "Salads": url = require('../assets/salad-background.png');
+            break;
+        case "Soups": url = require('../assets/soup-background.png');
+            break;
+        case "Desserts": url = require('../assets/desserts-background.png');
+            break;
+        case "Vegetables": url = require('../assets/vegetables-background.png');
+            break;
         case "Main Dishes": url = require('../assets/main-dishes-background.png');
-                            break;
-        case "Holidays"   : url = require('../assets/holidays-background.png');
-                            break;
-        default           : url = require('../assets/holidays-background.png');
-    } 
+            break;
+        case "Holidays": url = require('../assets/holidays-background.png');
+            break;
+        default: url = require('../assets/holidays-background.png');
+    }
 
     //=====================================================
     return (
@@ -109,6 +108,7 @@ const RecipesScreen = ({ navigation, route }) => {
                     {typeRecipes.length === 0 ? <Text style={styles.text}>You still don't have any  recipes here.</Text> : null}
                     <FlatList
                         style={styles.flatlist}
+                        key={route.params._id}
                         keyExtractor={item => item._id}
                         data={typeRecipes}
                         showsVerticalScrollIndicator
@@ -143,10 +143,6 @@ const RecipesScreen = ({ navigation, route }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        //alignItems: 'center',
-        //justifyContent: 'center',
-        //backgroundColor: "rgba(237, 230, 224, 0.83)",
-        //width: "100%",
         resizeMode: "cover"
     },
 
@@ -163,7 +159,6 @@ const styles = StyleSheet.create({
         width: "60%",
         alignItems: 'center',
         justifyContent: 'center',
-        //paddingTop: 10,
         backgroundColor: "rgba(0, 1, 0, 0.32)",
         borderColor: "gray",
         borderWidth: 1,
@@ -173,18 +168,12 @@ const styles = StyleSheet.create({
     flatlistContainer: {
         flex: 1,
         paddingTop: 8,
-        //backgroundColor: "black",
         width: "100%",
         alignItems: 'center',
-        //justifyContent: 'center',
-        //borderColor: "white",
-        //borderWidth: 1
     },
 
     insideContainer: {
         flex: 0.9,
-        //paddingTop: 8,
-        //backgroundColor: "black",
         width: "100%",
         alignItems: 'center',
         justifyContent: 'center',
@@ -206,7 +195,6 @@ const styles = StyleSheet.create({
         fontStyle: "italic",
         fontWeight: "bold",
         textAlign: "right",
-        //marginTop: 15,
         marginTop: 10,
         marginBottom: 10,
         textShadowColor: 'black',
@@ -235,7 +223,6 @@ const styles = StyleSheet.create({
         height: 200,
         resizeMode: "cover"
     }
-
 })
 
 export default RecipesScreen

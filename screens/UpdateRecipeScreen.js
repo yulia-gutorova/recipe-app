@@ -5,25 +5,24 @@ import {
     ImageBackground,
     Pressable,
     ScrollView,
-    KeyboardAvoidingView, 
+    KeyboardAvoidingView,
 } from "react-native";
 
 import UpdateRecipeForm from "../components/UpdateRecipeForm";
 import { Entypo } from '@expo/vector-icons';
-import {API_URL} from "@env"
+import { API_URL } from "@env"
 import axios from "axios";
 
 
 //---------------------------------------------------------
 const UpdateRecipeScreen = ({ navigation, route }) => {
 
-    let paramsRecipe= route.params.recipe; 
+    let paramsRecipe = route.params.recipe;
     //console.log("Params in UpdateRecipeScreen");
     //console.log(paramsRecipe);
 
     //---------------------------------------------------------
-    const handleUpdateFormSubmit = (form) => 
-    {
+    const handleUpdateFormSubmit = (form) => {
 
         //console.log("In handleUpdateFormSubmit");
         //console.log(form);
@@ -34,60 +33,52 @@ const UpdateRecipeScreen = ({ navigation, route }) => {
 
             let tagsArray = form.tags.split(" ");
             let ingredientsArray = form.ingredients.split("*");
-            console.log("In updateRecipe");
-            console.log(form.tags);
-            console.log(tagsArray);
-            console.log(form.ingredients);
-            console.log(ingredientsArray);
-
-
 
             let updatedRecipe = {
-                    type: form.type,
-                    name: form.name,
-                    description: form.description,
-                    ingredients: ingredientsArray,
-                    tags: tagsArray,
-                    cookTime: form.cookTime,
-                    calories: form.calories,
-                    directions: form.directions,
-                    rates: form.rates,
-            } 
+                type: form.type,
+                name: form.name,
+                description: form.description,
+                ingredients: ingredientsArray,
+                tags: tagsArray,
+                cookTime: form.cookTime,
+                calories: form.calories,
+                directions: form.directions,
+                rates: form.rates,
+            }
 
-                let url = API_URL + '/' + form._id;
+            let url = API_URL + '/' + form._id;
 
-                const resp = await axios.patch(url, updatedRecipe)
-                .then( navigation.push("Recipes", {type: form.type}))
-                .catch((error) => console.log('Error: ', error));  
+            const resp = await axios.patch(url, updatedRecipe)
+                .then(navigation.push("Recipes", { type: form.type }))
+                .catch((error) => console.log('Error: ', error));
         };
 
         updateRecipe(form);
-
     }
 
     //=====================================================
     return (
-        <KeyboardAvoidingView 
-        behavior={"height"}
-        keyboardVerticalOffset={0}
-        enabled={false} 
-        style={styles.container} > 
+        <KeyboardAvoidingView
+            behavior={"height"}
+            keyboardVerticalOffset={0}
+            enabled={false}
+            style={styles.container} >
 
-        <View style={styles.titleContainer}>
+            <View style={styles.titleContainer}>
                 <Text style={styles.text}>Uppdate the recipe</Text>
             </View>
 
-            <View   style={[styles.miniContainer]}>
-                <UpdateRecipeForm onSubmit={handleUpdateFormSubmit} recipe={paramsRecipe}/>
+            <View style={[styles.miniContainer]}>
+                <UpdateRecipeForm onSubmit={handleUpdateFormSubmit} recipe={paramsRecipe} />
             </View>
 
             <View style={styles.btnContainer}>
-                        <Pressable
-                            style={styles.btnPressMe}
-                            onPress={() => navigation.push("Home")}>
-                            <Text style={styles.btnText}><Entypo name="arrow-bold-left" size={24} color="#daa520" />Home</Text>
-                        </Pressable>
-            
+                <Pressable
+                    style={styles.btnPressMe}
+                    onPress={() => navigation.push("Home")}>
+                    <Text style={styles.btnText}><Entypo name="arrow-bold-left" size={24} color="#daa520" />Home</Text>
+                </Pressable>
+
             </View>
 
 

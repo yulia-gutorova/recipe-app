@@ -8,7 +8,7 @@ import { useState } from "react"
 export default function CustomRadioButton({ data, option, onSelect }) {
 
     const [userOption, setUserOption] = useState(option);
-    const [selected, setSelected] = useState(null);
+    //const [selected, setSelected] = useState(null);
 
     const selectHandler = (value) => {
       onSelect(value);

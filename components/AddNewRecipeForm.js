@@ -73,7 +73,7 @@ const AddNewRecipeForm = ({ onSubmit }) => {
                     keyboardVerticalOffset={100}
                     behavior={"position"}> */}
                 
-                <KeyboardAvoidingView behavior={"padding"}>
+                <KeyboardAvoidingView behavior={"padding"} enabled>
 
             {/* Type custom radio buttons */}
                     <View style={styles.miniContainer}>
@@ -244,15 +244,16 @@ const AddNewRecipeForm = ({ onSubmit }) => {
                         </View>
                     </View>
 
-            {/* Submit button */}
+{/*             {/* Submit button */}
                     <Pressable
                         style={styles.btnPressMe}
                         onPress={() => onSubmit(form)}>
                         <Text style={styles.btnText}>Submit</Text>
-                    </Pressable>
+                    </Pressable> 
                 </KeyboardAvoidingView>
-            </ScrollView>
+            {/* Submit button */}
 
+            </ScrollView>
         </View>
 
     )
