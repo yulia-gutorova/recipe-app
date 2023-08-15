@@ -6,7 +6,8 @@ import { Text,
     TextInput, 
     Pressable, 
     ScrollView, 
-    KeyboardAvoidingView } from "react-native"
+    KeyboardAvoidingView,
+    Alert} from "react-native"
 
 import CustomRadioButton from "./CustomRadioButton";
 
@@ -30,6 +31,25 @@ const AddNewRecipeForm = ({ onSubmit }) => {
         directions: "",
         rates: "",
     });
+
+ //---------------------------------------------------------
+    const submitHandler = (form) => {
+
+        if (form.type.trim().length === 0 ||
+            form.name.trim().length === 0 ||
+            form.description.trim().length === 0 ||
+            form.ingredients.trim().length === 0 ||
+            form.tags.trim().length === 0 ||
+            form.cookTime.trim().length === 0 ||
+            form.calories.trim().length === 0 ||
+            form.directions.trim().length === 0||
+            form.rates.trim().length === 0) 
+            {
+            Alert.alert('Check that you have filled in all the input fields');
+            }
+
+        else { onSubmit(form) };
+    }
 
     //---------------------------------------------------------
     const onChangeText = (name) => (text) => {
@@ -247,7 +267,7 @@ const AddNewRecipeForm = ({ onSubmit }) => {
 {/*             {/* Submit button */}
                     <Pressable
                         style={styles.btnPressMe}
-                        onPress={() => onSubmit(form)}>
+                        onPress={() => submitHandler(form)}>
                         <Text style={styles.btnText}>Submit</Text>
                     </Pressable> 
                 </KeyboardAvoidingView>

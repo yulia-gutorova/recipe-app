@@ -18,15 +18,9 @@ import axios from "axios";
 const UpdateRecipeScreen = ({ navigation, route }) => {
 
     let paramsRecipe = route.params.recipe;
-    //console.log("Params in UpdateRecipeScreen");
-    //console.log(paramsRecipe);
 
     //---------------------------------------------------------
     const handleUpdateFormSubmit = (form) => {
-
-        //console.log("In handleUpdateFormSubmit");
-        //console.log(form);
-        //console.log(form._id);
 
         //---------------------------------------------------------
         const updateRecipe = async (form) => {

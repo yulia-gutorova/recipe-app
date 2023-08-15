@@ -29,15 +29,9 @@ const RecipesScreen = ({ navigation, route }) => {
     //-----------------------------------------------------
     useFocusEffect(
         useCallback((type) => {
-            //console.log("inside useFocusEffect");
-            //console.log("Type outside");
-            //console.log(type);
             const getAllRecipes = async (type) => {
-                //console.log("In get all recipes function");
                 const resp = await axios.get(API_URL)
                     .then(resp => {
-                        //console.log("Responce");
-                        //console.log(resp.data);
                         setRecipes(resp.data);
                     })
 
@@ -54,11 +48,8 @@ const RecipesScreen = ({ navigation, route }) => {
     //-----------------------------------------------------
     useEffect(() => {
         const getAllRecipes = async (type) => {
-            //console.log("In get all recipes function");
             const resp = await axios.get(API_URL)
                 .then(resp => {
-                    //console.log("Responce");
-                    //console.log(resp.data);
                     setRecipes(resp.data);
                 })
 

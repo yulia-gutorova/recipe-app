@@ -8,7 +8,7 @@ import {
     Pressable,
     ScrollView,
     KeyboardAvoidingView,
-    Keyboard
+    Alert
 } from "react-native"
 import CustomRadioButton from "./CustomRadioButton";
 
@@ -35,6 +35,26 @@ const UpdateRecipeForm = ({ onSubmit, recipe }) => {
     });
 
     //---------------------------------------------------------
+    const submitHandler = (form) => {
+
+        if (form.type.trim().length === 0 ||
+            form.name.trim().length === 0 ||
+            form.description.trim().length === 0 ||
+            form.ingredients.trim().length === 0 ||
+            form.size.trim().length === 0 ||
+            form.tags.trim().length === 0 ||
+            form.cookTime.trim().length === 0 ||
+            form.calories.trim().length === 0 ||
+            form.directions.trim().length === 0||
+            form.rates.trim().length === 0) 
+            {
+            Alert.alert('Check that you have filled in all the input fields');
+            }
+
+        else { onSubmit(form) };
+    }
+
+    //---------------------------------------------------------
     const onChangeText = (name) => (text) => {
         setForm({ ...form, [name]: text })
     }
@@ -42,8 +62,7 @@ const UpdateRecipeForm = ({ onSubmit, recipe }) => {
     //---------------------------------------------------------
     const onChangeRadioButton = (name, text) => {
         setCheckedCalories(text);
-        setForm({ ...form, [name]: text });
-        
+        setForm({ ...form, [name]: text });     
     }
 
     //---------------------------------------------------------
@@ -55,7 +74,6 @@ const UpdateRecipeForm = ({ onSubmit, recipe }) => {
     const onChangeRatesRadioButton = (name, text) => {
         setCheckedRate(text);
         setForm({ ...form, [name]: text });
-        
     }
 
     //=====================================================
@@ -243,7 +261,7 @@ const UpdateRecipeForm = ({ onSubmit, recipe }) => {
                     {/* Submit button */}
                      <Pressable
                         style={styles.btnPressMe}
-                        onPress={() => onSubmit(form)}>
+                        onPress={() => submitHandler(form)}>
                         <Text style={styles.btnText}>Submit</Text>
                     </Pressable>  
 

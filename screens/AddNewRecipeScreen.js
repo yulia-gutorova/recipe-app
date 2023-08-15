@@ -36,9 +36,6 @@ const AddNewRecipeScreen = ({ navigation }) => {
                 directions: form.directions,
                 rates: form.rates,
             } 
-            //console.log("Inside handleFormSubmit");
-            //console.log("newRecipe");
-            //console.log(newRecipe);
 
             const resp = await axios.post(API_URL, newRecipe)
             .then( navigation.push("Recipes", {type: form.type}))

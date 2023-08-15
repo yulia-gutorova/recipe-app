@@ -29,56 +29,97 @@ const HomeScreen = ({ navigation }) => {
                 <Separator />
 
                 <Pressable
-                    style={({ pressed }) => [
+                    style={({ pressed, hovered, focused }) => [
                         {
-                            color: pressed ? 'red' : "green",
+                            backgroundColor: pressed ? 'backgroundColor: "rgba(0, 1, 0, 0.32)' : null,
                         },
                         styles.btnPressMe,
                     ]}
-
-                    // style={styles.btnPressMe}
-                    onPress={() => navigation.push("Recipes", { type: "Salads", path: "'../assets/vegetables-image.png'" })}>
-                    {({ hovered, focused, pressed }) => (<Text style={styles.btnText}>Salads</Text>)}
+                    onPress={() => navigation.push("Recipes", { type: "Salads" })}>
+                    {({ pressed }) => (
+                        <Text style={pressed ? styles.btnTextPressed : styles.btnText}>
+                            {pressed ? 'Salads' : 'Salads'}
+                        </Text>)}
                 </Pressable>
 
                 <Separator />
 
                 <Pressable
-                    style={styles.btnPressMe}
+                    style={({ pressed }) => [
+                        {
+                            backgroundColor: pressed ? 'backgroundColor: "rgba(0, 1, 0, 0.32)' : null,
+                        },
+                        styles.btnPressMe,
+                    ]}
                     onPress={() => navigation.push("Recipes", { type: "Soups" })}>
-                    <Text style={styles.btnText}>Soups</Text>
+                    {({ pressed }) => (
+                        <Text style={pressed ? styles.btnTextPressed : styles.btnText}>
+                            {pressed ? 'Soups' : 'Soups'}
+                        </Text>)}
                 </Pressable>
 
                 <Separator />
 
                 <Pressable
 
-                    style={styles.btnPressMe}
+                    style={({ pressed }) => [
+                        {
+                            backgroundColor: pressed ? 'backgroundColor: "rgba(0, 1, 0, 0.32)' : null,
+                        },
+                        styles.btnPressMe,
+                    ]}
                     onMouseI
                     onPress={() => navigation.push("Recipes", { type: "Main Dishes" })}>
-                    <Text style={styles.btnText}>Main Dishes</Text>
+                    {({ pressed }) => (
+                        <Text style={pressed ? styles.btnTextPressed : styles.btnText}>
+                            {pressed ? 'Main Dishes' : 'Main Dishes'}
+                        </Text>)}
                 </Pressable>
 
                 <Pressable
-                    style={styles.btnPressMe}
+                    style={({ pressed }) => [
+                        {
+                            backgroundColor: pressed ? 'backgroundColor: "rgba(0, 1, 0, 0.32)' : null,
+                        },
+                        styles.btnPressMe,
+                    ]}
                     onPress={() => navigation.push("Recipes", { type: "Desserts" })}>
-                    <Text style={styles.btnText}>Desserts</Text>
+                                        {({ pressed }) => (
+                        <Text style={pressed ? styles.btnTextPressed : styles.btnText}>
+                            {pressed ? 'Desserts' : 'Desserts'}
+                        </Text>)}
                 </Pressable>
 
                 <Separator />
 
                 <Pressable
-                    style={styles.btnPressMe}
+                    style={({ pressed }) => [
+                        {
+                            backgroundColor: pressed ? 'backgroundColor: "rgba(0, 1, 0, 0.32)' : null,
+                        },
+                        styles.btnPressMe,
+                    ]}
                     onPress={() => navigation.push("Recipes", { type: "Vegetables" })}>
-                    <Text style={styles.btnText}>Vegetables</Text>
+                                        {({ pressed }) => (
+                        <Text style={pressed ? styles.btnTextPressed : styles.btnText}>
+                            {pressed ? 'Vegatables' : 'Vegetables'}
+                        </Text>)}
                 </Pressable>
 
                 <Separator />
 
                 <Pressable
-                    style={styles.btnPressMe}
+                    style={({ pressed }) => [
+                        {
+                            backgroundColor: pressed ? 'backgroundColor: "rgba(0, 1, 0, 0.32)' : null,
+                        },
+                        styles.btnPressMe,
+                    ]}
                     onPress={() => navigation.push("Recipes", { type: "Holidays" })}>
-                    <Text style={styles.btnText}>Holidays</Text>
+                                        {({ pressed }) => (
+                        <Text style={pressed ? styles.btnTextPressed : styles.btnText}>
+                            {pressed ? 'Holidays' : 'Holidays'}
+                        </Text>)}
                 </Pressable>
 
                 <Separator />
@@ -106,7 +147,9 @@ const styles = StyleSheet.create({
     btnContainer: {
         flex: 1,
         width: "100%",
-        opacity: 0.8
+        opacity: 0.8,
+        //justifyContent:"center",
+        alignItems: "center"
     },
 
     miniContainer: {
@@ -140,6 +183,17 @@ const styles = StyleSheet.create({
         width: "80%"
     },
 
+    btnTextPressed: {
+        color: "#daa520",
+        fontSize: 24,
+        fontWeight: "bold",
+        textShadowColor: 'black',
+        textShadowOffset: { width: 2, height: 2 },
+        textShadowRadius: 2,
+        marginLeft: 60,
+        width: "80%"
+    },
+
     addNewText: {
         color: "green",
         fontSize: 24,
@@ -156,7 +210,10 @@ const styles = StyleSheet.create({
 
     btnPressMe: {
         paddingVertical: 10,
-        paddingLeft: 100,
+        paddingLeft: 40,
+        width: 300,
+        textAlign: "center",
+        borderRadius: 20
     },
 
     btnAddNew: {
