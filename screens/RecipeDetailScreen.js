@@ -8,7 +8,6 @@ import {
     FlatList,
     ImageBackground,
     Modal,
-    Button,
     ScrollView, 
     Alert
 } from "react-native";

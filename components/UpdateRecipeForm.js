@@ -41,7 +41,6 @@ const UpdateRecipeForm = ({ onSubmit, recipe }) => {
             form.name.trim().length === 0 ||
             form.description.trim().length === 0 ||
             form.ingredients.trim().length === 0 ||
-            form.size.trim().length === 0 ||
             form.tags.trim().length === 0 ||
             form.cookTime.trim().length === 0 ||
             form.calories.trim().length === 0 ||
