@@ -38,7 +38,8 @@ const AddNewRecipeScreen = ({ navigation }) => {
             } 
 
             const resp = await axios.post(API_URL, newRecipe)
-            .then( navigation.push("Recipes", {type: form.type}))
+            //.then( navigation.push("Recipes", {type: form.type}))
+            .then( navigation.push("Home"))
             .catch((error) => console.log('Error: ', error));
         };
         
