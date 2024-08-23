@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState, useCallback, useEffect } from "react"
 import { useFocusEffect, useIsFocused } from '@react-navigation/native';
+import { BlurView } from '@react-native-community/blur';
 
 import {
     View,
@@ -91,9 +92,9 @@ const RecipesScreen = ({ navigation, route }) => {
 
             <View style={styles.insideContainer}>
 
-                <View style={styles.titleContainer}>
-                    <Text style={styles.text}>{type}</Text>
-                </View>
+                    <View style={styles.titleContainer}>
+                        <Text style={styles.text}>{type}</Text>
+                    </View>
 
                 <View style={styles.flatlistContainer}>
                     {typeRecipes.length === 0 ? <Text style={styles.text}>You still don't have any  recipes here.</Text> : null}
@@ -150,10 +151,11 @@ const styles = StyleSheet.create({
         width: "60%",
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: "rgba(0, 1, 0, 0.32)",
+        backgroundColor: "rgba(0, 1, 0, 0.3)",
         borderColor: "gray",
         borderWidth: 1,
         borderRadius: 30,
+        opacity: 1,
     },
 
     flatlistContainer: {
@@ -161,6 +163,7 @@ const styles = StyleSheet.create({
         paddingTop: 8,
         width: "100%",
         alignItems: 'center',
+        
     },
 
     insideContainer: {
@@ -168,7 +171,8 @@ const styles = StyleSheet.create({
         width: "100%",
         alignItems: 'center',
         justifyContent: 'center',
-        marginTop: 220
+        marginTop: 150,
+        
     },
 
     imageContainer: {
@@ -177,7 +181,7 @@ const styles = StyleSheet.create({
     },
 
     flatlist: {
-        maxHeight: 300,
+        maxHeight: 500,
     },
 
     text: {
@@ -213,7 +217,8 @@ const styles = StyleSheet.create({
         width: "100%",
         height: 200,
         resizeMode: "cover"
-    }
+    }, 
+
 })
 
 export default RecipesScreen

@@ -77,11 +77,11 @@ const UpdateRecipeForm = ({ onSubmit, recipe }) => {
 
     //=====================================================
     return (
-        <View>
+        <View style={styles.mainContainer}>
 
             <ScrollView style={styles.container}>
 
-                <KeyboardAvoidingView behavior={"padding"}>
+                <KeyboardAvoidingView behavior={"padding"} enabled>
                     {/* Type custom radio buttons */}
                     <View style={styles.miniContainer}>
                         <Text style={[styles.paragraph, { fontWeight: "bold" }]}>Choose type: </Text>
@@ -100,7 +100,7 @@ const UpdateRecipeForm = ({ onSubmit, recipe }) => {
                     />
 
                     {/* Description text field */}
-                    <Text style={{ fontWeight: "bold", marginLeft: 10 }}>Description: </Text>
+                    <Text style={styles.title}>Description: </Text>
                     <TextInput
                         text={form.description}
                         selectionColor={'black'}
@@ -111,7 +111,7 @@ const UpdateRecipeForm = ({ onSubmit, recipe }) => {
                     />
 
                     {/* Ingredients text field */}
-                    <Text style={{ fontWeight: "bold", marginLeft: 10 }}>Ingredients (split with **): </Text>
+                    <Text style={styles.title}>Ingredients (split with **): </Text>
                     <TextInput
                         text={form.ingredients}
                         selectionColor={'black'}
@@ -122,7 +122,7 @@ const UpdateRecipeForm = ({ onSubmit, recipe }) => {
                     />
 
                     {/* Tags text field */}
-                    <Text style={{ fontWeight: "bold", marginLeft: 10 }}>Tags (split with space): </Text>
+                    <Text style={styles.title}>Tags (split with space): </Text>
                     <TextInput
                         text={form.tags}
                         selectionColor={'black'}
@@ -133,7 +133,7 @@ const UpdateRecipeForm = ({ onSubmit, recipe }) => {
 
                     {/* Cook time text field */}
 
-                    <Text style={{ fontWeight: "bold", marginLeft: 10 }}>Cook Time: </Text>
+                    <Text style={styles.title}>Cook Time: </Text>
                     <TextInput
                         keyboardType="phone-pad"
                         selectionColor={'black'}
@@ -144,7 +144,7 @@ const UpdateRecipeForm = ({ onSubmit, recipe }) => {
 
                     {/* Calories radio buttons */}
                     <View style={styles.miniContainer}>
-                        <Text style={{ fontWeight: "bold" }}>Calories: </Text>
+                        <Text style={styles.title}>Calories: </Text>
 
                         <View style={styles.radioButtonsContainer}>
 
@@ -182,7 +182,7 @@ const UpdateRecipeForm = ({ onSubmit, recipe }) => {
                     </View>
 
                     {/* Directions text field */}
-                    <Text style={{ fontWeight: "bold", marginLeft: 10 }}>Directions: </Text>
+                    <Text style={styles.title}>Directions: </Text>
                     <TextInput
                         text={form.directions}
                         selectionColor={'black'}
@@ -194,12 +194,12 @@ const UpdateRecipeForm = ({ onSubmit, recipe }) => {
 
                     {/* Rates radio buttons*/}
                     <View style={styles.miniContainer}>
-                        <Text style={{ fontWeight: "bold" }}>Rates: </Text>
+                        <Text style={styles.title}>Rates: </Text>
 
                         <View style={styles.radioButtonsContainer}>
 
                             <View>
-                                <Text style={{ paddingLeft: 10 }}>1</Text>
+                                <Text style={{ paddingLeft: 10 }}> 1</Text>
                                 <RadioButton
                                     color="red"
                                     value="1"
@@ -210,7 +210,7 @@ const UpdateRecipeForm = ({ onSubmit, recipe }) => {
 
                             
                             <View>
-                                <Text style={{ paddingLeft: 10 }}>2</Text>
+                                <Text style={{ paddingLeft: 10 }}> 2</Text>
                                 <RadioButton
                                     color="red"
                                     value="2"
@@ -220,7 +220,7 @@ const UpdateRecipeForm = ({ onSubmit, recipe }) => {
                             </View>
 
                             <View>
-                                <Text style={{ paddingLeft: 10 }}>3</Text>
+                                <Text style={{ paddingLeft: 10 }}> 3</Text>
                                 <RadioButton
                                     color="red"
                                     value="3"
@@ -230,7 +230,7 @@ const UpdateRecipeForm = ({ onSubmit, recipe }) => {
                             </View>
 
                             <View>
-                                <Text style={{ paddingLeft: 10 }}>4</Text>
+                                <Text style={{ paddingLeft: 10 }}> 4</Text>
                                 <RadioButton
                                     color="red"
                                     value="4"
@@ -240,7 +240,7 @@ const UpdateRecipeForm = ({ onSubmit, recipe }) => {
                             </View>
 
                             <View>
-                                <Text style={{ paddingLeft: 10 }}>5</Text>
+                                <Text style={{ paddingLeft: 10 }}> 5</Text>
                                 <RadioButton
                                     color="red"
                                     value="5"
@@ -251,11 +251,7 @@ const UpdateRecipeForm = ({ onSubmit, recipe }) => {
 
                         </View>
                     </View>
-{/* 
-                    <TextInput
-                        style={[styles.input, styles.inputText]}
-                        onChangeText={onChangeText("name")}
-                    /> */}
+
 
                     {/* Submit button */}
                      <Pressable
@@ -272,20 +268,29 @@ const UpdateRecipeForm = ({ onSubmit, recipe }) => {
     )
 }
 
-//-------------- Styles-----------------------------
+/* //-------------- Styles-----------------------------
 const styles = StyleSheet.create({
+    mainContainer: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: 'auto',
+    },
+
     container: {
-        flex: 1,
-        padding: 20,
+        flex: 0.8,
+        //padding: 20,
         backgroundColor: "rgba(176, 165, 153, 1)",
-        width: 420,
+       // width: 420,
+
     },
 
     miniContainer: {
-        flex: 1,
+        flex: 0.8,
         padding: 20,
-        width: 400,
+        width: "100%",
+        //width: 400,
         alignSelf: 'center',
+  
     },
 
     radioButtonsContainer: {
@@ -313,7 +318,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
         paddingVertical: 10,
         alignItems: "center",
-        marginBottom: 350,
+        marginBottom: 50,
     },
 
     btnText: {
@@ -329,6 +334,71 @@ const styles = StyleSheet.create({
     newSubmit:{
         backgroundColor: "rgba(176, 165, 153, 1)"
     }
+}) */
+
+    //-------------- Styles-----------------------------
+const styles = StyleSheet.create({
+    mainContainer: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: 'auto',
+    },
+
+    container: {
+        flex: 0.8,
+        //padding: 20,
+        backgroundColor: "rgba(176, 165, 153, 1)",
+        // width: "100%",
+
+    },
+
+    miniContainer: {
+        flex: 0.8,
+        padding: 10,
+        width: "100%",
+        alignSelf: 'center',
+    },
+
+    radioButtonsContainer: {
+        flexDirection: "row",
+        justifyContent: "space-around",
+        borderRadius: 10,
+    },
+
+    input: {
+        height: 40,
+        margin: 12,
+        borderWidth: 1,
+        borderColor: "rgba(108, 56, 32, 0.83)",
+        padding: 10,
+        borderRadius: 10,
+    },
+
+    btnPressMe: {
+        alignSelf: 'center',
+        width: 250,
+        paddingHorizontal: 20,
+        paddingVertical: 10,
+        alignItems: "center",
+        marginBottom: 50,
+    },
+
+    btnText: {
+        color: "#daa520",
+        fontSize: 24,
+        fontWeight: "bold",
+        textShadowColor: 'black',
+        textShadowOffset: { width: 1, height: 1 },
+        textShadowRadius: 5,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+
+    title: {
+        fontWeight: "bold",
+        marginLeft: 10,
+        fontStyle: "italic",
+    },
 })
 
 export default UpdateRecipeForm;

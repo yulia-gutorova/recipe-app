@@ -1,13 +1,15 @@
 import { RadioButton } from 'react-native-paper';
 import { useState } from "react"
-import { Text, 
-    View, 
-    StyleSheet, 
-    TextInput, 
-    Pressable, 
-    ScrollView, 
+import {
+    Text,
+    View,
+    StyleSheet,
+    TextInput,
+    Pressable,
+    ScrollView,
     KeyboardAvoidingView,
-    Alert} from "react-native"
+    Alert
+} from "react-native"
 
 import CustomRadioButton from "./CustomRadioButton";
 
@@ -17,7 +19,7 @@ const AddNewRecipeForm = ({ onSubmit }) => {
     const [checkedCalories, setCheckedCalories] = useState('');
 
     const [checkedRate, setCheckedRate] = useState('');
-    
+
     const types = ["Soups", "Salads", "Main dishes", "Desserts", 'Vegetables', "Holidays"];
 
     const [form, setForm] = useState({
@@ -32,7 +34,7 @@ const AddNewRecipeForm = ({ onSubmit }) => {
         rates: "",
     });
 
- //---------------------------------------------------------
+    //---------------------------------------------------------
     const submitHandler = (form) => {
 
         if (form.type.trim().length === 0 ||
@@ -42,11 +44,10 @@ const AddNewRecipeForm = ({ onSubmit }) => {
             form.tags.trim().length === 0 ||
             form.cookTime.trim().length === 0 ||
             form.calories.trim().length === 0 ||
-            form.directions.trim().length === 0||
-            form.rates.trim().length === 0) 
-            {
+            form.directions.trim().length === 0 ||
+            form.rates.trim().length === 0) {
             Alert.alert('Check that you have filled in all the input fields');
-            }
+        }
 
         else { onSubmit(form) };
     }
@@ -72,7 +73,7 @@ const AddNewRecipeForm = ({ onSubmit }) => {
         setForm({
             ...form,
             [name]: text
-        })
+        }) 
     }
     //---------------------------------------------------------
     const onChangeRatesRadioButton = (name, text) => {
@@ -87,22 +88,22 @@ const AddNewRecipeForm = ({ onSubmit }) => {
     return (
         <View style={styles.mainContainer}>
 
-            <ScrollView  style={styles.container}>
-{/*             <KeyboardAvoidingView
+            <ScrollView style={styles.container}>
+                {/*             <KeyboardAvoidingView
                     style={{ flex: 1 }}
                     keyboardVerticalOffset={100}
                     behavior={"position"}> */}
-                
+
                 <KeyboardAvoidingView behavior={"padding"} enabled>
 
-            {/* Type custom radio buttons */}
+                    {/* Type custom radio buttons */}
                     <View style={styles.miniContainer}>
-                        <Text style={[styles.paragraph, {fontWeight:"bold"}]}>Choose type: </Text>
+                        <Text style={[styles.paragraph, { fontWeight: "bold", fontStyle: "italic", }]}>Choose type: </Text>
                         <CustomRadioButton data={types} onSelect={(value) => onChangeCustomRadioButton("type", value)} />
                     </View>
 
-            {/* Name text field */}
-                    <Text style={{fontWeight:"bold", marginLeft: 10}}>Name: </Text>
+                    {/* Name text field */}
+                    <Text style={styles.title}>Name: </Text>
                     <TextInput
                         label="Name"
                         selectionColor={'black'}
@@ -111,30 +112,30 @@ const AddNewRecipeForm = ({ onSubmit }) => {
                         value={form.name}
                     />
 
-            {/* Description text field */}
-                    <Text style={{fontWeight:"bold", marginLeft: 10}}>Description: </Text>
+                    {/* Description text field */}
+                    <Text style={styles.title}>Description: </Text>
                     <TextInput
                         label="Desription"
                         selectionColor={'black'}
                         multiline={true}
-                        style={[styles.input, {minHeight: 100, textAlignVertical: "top"}]}
+                        style={[styles.input, { minHeight: 100, textAlignVertical: "top" }]}
                         onChangeText={onChangeText("description")}
                         value={form.description}
                     />
 
-            {/* Ingredients text field */}
-                    <Text style={{fontWeight:"bold", marginLeft: 10}}>Ingredients (split with **): </Text>
+                    {/* Ingredients text field */}
+                    <Text style={styles.title}>Ingredients (split with **): </Text>
                     <TextInput
                         label="Ingredients"
                         selectionColor={'black'}
                         multiline={true}
-                        style={[styles.input, {minHeight: 100, textAlignVertical: "top"}]}
+                        style={[styles.input, { minHeight: 100, textAlignVertical: "top" }]}
                         onChangeText={onChangeText("ingredients")}
                         value={form.ingredients}
                     />
 
-            {/* Tags text field */}
-                    <Text style={{fontWeight:"bold", marginLeft: 10}}>Tags (split with space): </Text>
+                    {/* Tags text field */}
+                    <Text style={styles.title}>Tags (split with space): </Text>
                     <TextInput
                         label="Tags"
                         selectionColor={'black'}
@@ -143,8 +144,8 @@ const AddNewRecipeForm = ({ onSubmit }) => {
                         value={form.tags}
                     />
 
-            {/* Cook time text field */}
-                    <Text style={{fontWeight:"bold", marginLeft: 10}}>Cook Time: </Text>
+                    {/* Cook time text field */}
+                    <Text style={styles.title}>Cook Time (minutes): </Text>
                     <TextInput
                         label="Cook Time"
                         selectionColor={'black'}
@@ -155,20 +156,20 @@ const AddNewRecipeForm = ({ onSubmit }) => {
                         value={form.cookTime}
                     />
 
-            {/* Calories radio buttons */}
+                    {/* Calories radio buttons */}
                     <View style={[styles.miniContainer]}>
-                        <Text style={{fontWeight:"bold"}}>Calories: </Text>
+                        <Text style={styles.title}>Calories: </Text>
 
-                        <View style={[styles.radioButtonsContainer, {backgroundColor: "gray"}]}>
+                        <View style={[styles.radioButtonsContainer, { backgroundColor: "#daa520" }]}>
 
                             <View>
-                                <Text>Low</Text>
-                                <RadioButton
-                                    color="green"
-                                    value="low"
-                                    status={checkedCalories === 'low' ? 'checked' : 'unchecked'}
-                                    onPress={(value) => onChangeRadioButton("calories", "low")}
-                                />
+                                <Text>  Low </Text>
+                                    <RadioButton
+                                        color="green"
+                                        value="low"
+                                        status={checkedCalories === 'low' ? 'checked' : 'unchecked'}
+                                        onPress={(value) => onChangeRadioButton("calories", "low")}
+                                    />
                             </View>
 
                             <View>
@@ -182,7 +183,7 @@ const AddNewRecipeForm = ({ onSubmit }) => {
                             </View>
 
                             <View>
-                                <Text>High</Text>
+                                <Text> High </Text>
                                 <RadioButton
                                     color="green"
                                     value="high"
@@ -194,25 +195,25 @@ const AddNewRecipeForm = ({ onSubmit }) => {
                         </View>
                     </View>
 
-            {/* Directionstext field */}
-                    <Text style={{fontWeight:"bold", marginLeft: 10}}>Directions: </Text>
+                    {/* Directionstext field */}
+                    <Text style={styles.title}>Directions: </Text>
                     <TextInput
                         label="Directions"
                         selectionColor={'black'}
                         multiline={true}
-                        style={[styles.input, {minHeight: 100, textAlignVertical: "top"}]}
+                        style={[styles.input, { minHeight: 100, textAlignVertical: "top" }]}
                         onChangeText={onChangeText("directions")}
                         value={form.directions}
                     />
-                    
-            {/* Rates radio buttons*/}
-                    <View style={styles.miniContainer}>
-                        <Text style={{fontWeight:"bold"}}>Rates: </Text>
 
-                        <View style={[styles.radioButtonsContainer, , {backgroundColor: "gray"}]}>
+                    {/* Rates radio buttons*/}
+                    <View style={styles.miniContainer}>
+                        <Text style={styles.title}>Rates: </Text>
+
+                        <View style={[styles.radioButtonsContainer, , { backgroundColor: "#daa520" }]}>
 
                             <View>
-                                <Text style={{paddingLeft: 10}}>1</Text>
+                                <Text style={{ paddingLeft: 10 }}> 1</Text>
                                 <RadioButton
                                     color="red"
                                     value="1"
@@ -222,7 +223,7 @@ const AddNewRecipeForm = ({ onSubmit }) => {
                             </View>
 
                             <View>
-                                <Text style={{paddingLeft: 10}}>2</Text>
+                                <Text style={{ paddingLeft: 10 }}> 2</Text>
                                 <RadioButton
                                     color="red"
                                     value="2"
@@ -232,7 +233,7 @@ const AddNewRecipeForm = ({ onSubmit }) => {
                             </View>
 
                             <View>
-                                <Text style={{paddingLeft: 10}}>3</Text>
+                                <Text style={{ paddingLeft: 10, }}> 3</Text>
                                 <RadioButton
                                     color="red"
                                     value="3"
@@ -242,7 +243,7 @@ const AddNewRecipeForm = ({ onSubmit }) => {
                             </View>
 
                             <View>
-                                <Text style={{paddingLeft: 10}}>4</Text>
+                                <Text style={{ paddingLeft: 10 }}> 4</Text>
                                 <RadioButton
                                     color="red"
                                     value="4"
@@ -252,7 +253,7 @@ const AddNewRecipeForm = ({ onSubmit }) => {
                             </View>
 
                             <View>
-                                <Text style={{paddingLeft: 10}}>5</Text>
+                                <Text style={{ paddingLeft: 10 }}> 5</Text>
                                 <RadioButton
                                     color="red"
                                     value="5"
@@ -264,14 +265,14 @@ const AddNewRecipeForm = ({ onSubmit }) => {
                         </View>
                     </View>
 
-{/*             {/* Submit button */}
+                    {/* Submit button */}
                     <Pressable
                         style={styles.btnPressMe}
                         onPress={() => submitHandler(form)}>
                         <Text style={styles.btnText}>Submit</Text>
-                    </Pressable> 
+                    </Pressable>
                 </KeyboardAvoidingView>
-            {/* Submit button */}
+                {/* Submit button */}
 
             </ScrollView>
         </View>
@@ -284,45 +285,50 @@ const styles = StyleSheet.create({
     mainContainer: {
         alignItems: 'center',
         justifyContent: 'center',
+        height: 'auto',
     },
 
     container: {
         flex: 0.8,
         //padding: 20,
         backgroundColor: "rgba(176, 165, 153, 1)",
-        width: "100%",
+        // width: "100%",
 
     },
 
     miniContainer: {
         flex: 0.8,
-        padding: 20,
+        padding: 10,
         width: "100%",
         alignSelf: 'center',
+        //backgroundColor: "rgba(176, 165, 153, 1)",
         //borderColor: "gray",
         //borderWidth: 1
+
     },
 
     radioButtonsContainer: {
         flexDirection: "row",
-        justifyContent: "space-around"
+        justifyContent: "space-around",
+        borderRadius: 10,
     },
- 
+
     input: {
         height: 40,
         margin: 12,
         borderWidth: 1,
         borderColor: "rgba(108, 56, 32, 0.83)",
         padding: 10,
-    }, 
+        borderRadius: 10,
+    },
 
     btnPressMe: {
         alignSelf: 'center',
-        width: 200,
+        width: 250,
         paddingHorizontal: 20,
         paddingVertical: 10,
         alignItems: "center",
-        marginBottom: 150,
+        marginBottom: 50,
     },
 
     btnText: {
@@ -334,7 +340,13 @@ const styles = StyleSheet.create({
         textShadowRadius: 5,
         alignItems: 'center',
         justifyContent: 'center',
-    }
+    },
+
+    title: {
+        fontWeight: "bold",
+        marginLeft: 10,
+        fontStyle: "italic",
+    },
 })
 
 export default AddNewRecipeForm;

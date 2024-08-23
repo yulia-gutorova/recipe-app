@@ -41,11 +41,10 @@ const HomeScreen = ({ navigation }) => {
                             {pressed ? 'Salads' : 'Salads'}
                         </Text>)}
                 </Pressable>
-
                 <Separator />
-
                 <Pressable
-                    style={({ pressed }) => [
+                    style={({ pressed }) => 
+                    [
                         {
                             backgroundColor: pressed ? 'backgroundColor: "rgba(0, 1, 0, 0.32)' : null,
                         },
@@ -57,11 +56,8 @@ const HomeScreen = ({ navigation }) => {
                             {pressed ? 'Soups' : 'Soups'}
                         </Text>)}
                 </Pressable>
-
                 <Separator />
-
                 <Pressable
-
                     style={({ pressed }) => [
                         {
                             backgroundColor: pressed ? 'backgroundColor: "rgba(0, 1, 0, 0.32)' : null,
@@ -75,7 +71,6 @@ const HomeScreen = ({ navigation }) => {
                             {pressed ? 'Main Dishes' : 'Main Dishes'}
                         </Text>)}
                 </Pressable>
-
                 <Pressable
                     style={({ pressed }) => [
                         {
@@ -89,9 +84,7 @@ const HomeScreen = ({ navigation }) => {
                             {pressed ? 'Desserts' : 'Desserts'}
                         </Text>)}
                 </Pressable>
-
                 <Separator />
-
                 <Pressable
                     style={({ pressed }) => [
                         {
@@ -105,9 +98,7 @@ const HomeScreen = ({ navigation }) => {
                             {pressed ? 'Vegatables' : 'Vegetables'}
                         </Text>)}
                 </Pressable>
-
                 <Separator />
-
                 <Pressable
                     style={({ pressed }) => [
                         {
@@ -121,9 +112,7 @@ const HomeScreen = ({ navigation }) => {
                             {pressed ? 'Holidays' : 'Holidays'}
                         </Text>)}
                 </Pressable>
-
                 <Separator />
-
                 <Pressable
                     style={[styles.btnAddNew,]}
                     onPress={() => navigation.push("AddNew")}>
@@ -148,8 +137,8 @@ const styles = StyleSheet.create({
         flex: 1,
         width: "100%",
         opacity: 0.8,
-        //justifyContent:"center",
-        alignItems: "center"
+        alignItems: "center",
+          
     },
 
     miniContainer: {
@@ -162,7 +151,7 @@ const styles = StyleSheet.create({
 
     text: {
         fontSize: 36,
-        color: "green",
+        color: "lightgreen",
         fontStyle: "italic",
         fontWeight: "bold",
         marginLeft: 100,
@@ -179,8 +168,8 @@ const styles = StyleSheet.create({
         textShadowColor: 'black',
         textShadowOffset: { width: 1, height: 1 },
         textShadowRadius: 1,
-        marginLeft: 60,
-        width: "80%"
+        //marginLeft: 60,
+        //width: "80%"
     },
 
     btnTextPressed: {
@@ -190,8 +179,10 @@ const styles = StyleSheet.create({
         textShadowColor: 'black',
         textShadowOffset: { width: 2, height: 2 },
         textShadowRadius: 2,
-        marginLeft: 60,
-        width: "80%"
+        alignItems: 'center',
+        justifyContent: 'center',
+        //marginLeft: 60,
+        //width: "80%"
     },
 
     addNewText: {
@@ -210,20 +201,23 @@ const styles = StyleSheet.create({
 
     btnPressMe: {
         paddingVertical: 10,
-        paddingLeft: 40,
+        //paddingLeft: 40,
         width: 300,
-        textAlign: "center",
-        borderRadius: 20
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 20,
+        borderColor: "layghtgray",   
     },
 
     btnAddNew: {
         paddingVertical: 10,
         alignSelf: "center",
-        backgroundColor: "rgba(0, 1, 0, 0.32)",
+        backgroundColor: "rgba(0, 1, 0, 0.8)",
         width: 300,
         borderRadius: 30,
-        borderColor: "gray",
-        borderWidth: 1
+        borderColor: "white",
+        borderWidth: 1,
+        marginTop: 50,  
     },
 
 })

@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     flexDirection: "row", 
     flexWrap: 'wrap', 
     alignItems: "center", 
-    
+    justifyContent: 'center',
   },
 
   option: {
@@ -57,12 +57,14 @@ const styles = StyleSheet.create({
   selected: {
     backgroundColor: 'red',
     borderRadius: 10,
-    margin: 7,
+    margin: 6,
   },
 
   pressable: {
     width: 100,
-    paddingVertical: 5, 
+    paddingVertical: 6, 
     margin: 6,
+    alignItems: 'center', // Centers content horizontally
+    justifyContent: 'center',
   }
 });

@@ -5,7 +5,7 @@ const Ingredients = ({ ing }) => {
         ing.map((ingredient, index) =>
         (
             <View style={styles.oneIngredient}>
-                <Text key={index} style={styles.oneIngredientText}>{ingredient}</Text>
+                <Text key={index} style={styles.oneIngredientText}>{ingredient.trim()}</Text>
             </View>
         ))
     )
@@ -14,7 +14,7 @@ const Ingredients = ({ ing }) => {
 //-------------- Styles-----------------------------
 const styles = StyleSheet.create({
     oneIngredient: {
-        marginVertical: 5,
+        marginVertical: -2,
     },
 
     oneIngredientText: {

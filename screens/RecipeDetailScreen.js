@@ -84,7 +84,7 @@ const RecipeDetailScreen = ({ navigation, route }) => {
                         style={styles.btnGetProperties}
                         onPress={() => { setIngredientsModalVisibility(!ingredientsModalVisibility) }}>
 
-                        <Text style={[styles.btnGetText, { color: "darkgray" }]}><AntDesign name="pluscircle" size={24} color="#daa520" /> Ingredients</Text>
+                        <Text style={[styles.btnGetText, { color: "darkgray" }]}><AntDesign name="pluscircle" size={24} color="#daa520" /> Show Ingredients</Text>
                         
                         <Modal style={styles.modalContainer}
                             animationType={"fade"}
@@ -112,7 +112,7 @@ const RecipeDetailScreen = ({ navigation, route }) => {
                         style={styles.btnGetProperties}
                         onPress={() => { setDirectionsModalVisibility(!directionsModalVisibility) }}>
 
-                        <Text style={[styles.btnGetText, { color: "darkgray" }]}><AntDesign name="pluscircle" size={24} color="#daa520" /> Directions</Text>
+                        <Text style={[styles.btnGetText, { color: "darkgray" }]}><AntDesign name="pluscircle" size={24} color="#daa520" /> Show Directions</Text>
 
                         <Modal style={styles.modalContainer}
                             animationType={"fade"}
@@ -280,7 +280,7 @@ const styles = StyleSheet.create({
     },
 
     btnGetProperties: {
-        width: 200,
+        width: "auto",
         paddingVertical: 10,
         paddingLeft: 10,
         paddingRight: 10,

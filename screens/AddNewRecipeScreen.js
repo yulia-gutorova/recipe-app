@@ -84,9 +84,10 @@ const AddNewRecipeScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'flex-start',
+        alignItems: 'center',
         justifyContent: 'center',
-        resizeMode: "cover"
+        resizeMode: "cover",
+        backgroundColor: "rgba(176, 165, 153, 1)"
     },
 
     btnContainer: {
@@ -95,11 +96,13 @@ const styles = StyleSheet.create({
         backgroundColor: "rgba(108, 56, 32, 0.83)",
         alignItems: 'flex-end',
         justifyContent: 'center',
+        borderTopLeftRadius: 50,   
+        borderTopRightRadius: 20,
     },
 
     miniContainer: {
         flex: 0.8,
-        alignItems: 'flex-start',
+        alignItems: 'center',
         justifyContent: 'flex-start',
     },
 
@@ -109,6 +112,8 @@ const styles = StyleSheet.create({
         alignItems: 'flex-start',
         justifyContent: 'flex-start',
         backgroundColor: "rgba(89, 31, 5, 0.83)",
+        borderBottomRightRadius: 50,
+        borderBottomLeftRadius: 20,
     },
 
     text: {

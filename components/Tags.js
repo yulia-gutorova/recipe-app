@@ -1,10 +1,13 @@
 import { Text, StyleSheet, View } from "react-native"
 
+
 const Tags = ({ t }) => {
     return (
         <View style={styles.container}>
-            {t.map((t, index) => {
-                return (<><Text key={index} style={styles.oneTag}>{t}</Text></>)
+            {t.filter(tag => tag.trim().length > 0).map((tag, index) => {
+                return (
+                    <Text key={index} style={styles.oneTag}>{tag}</Text>
+                );
             })}
         </View>
     )
